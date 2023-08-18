@@ -33,9 +33,8 @@ const Tabs = forwardRef(
                 </div>
 
                 <div
-                    className={`container relative mx-auto ${
-                        tab !== 1 && `min-h-[${height}px]`
-                    }`}
+                    className="container relative mx-auto"
+                    style={{ minHeight: height + "px" }}
                 >
                     <TabTracking tab={tab} ref={tabContainer1} />
                     <TabShipping tab={tab} ref={tabContainer2} />

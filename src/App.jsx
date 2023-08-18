@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import Header from "./components/Header";
 import Banner from "./components/Banner";
@@ -43,10 +43,6 @@ const App = () => {
             }
         }
     };
-
-    useEffect(() => {
-        console.log(height);
-    }, [height]);
 
     return (
         <>
