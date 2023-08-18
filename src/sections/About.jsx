@@ -1,6 +1,6 @@
 const About = () => {
     return (
-        <section id="about" className="container mt-20 px-10">
+        <section id="about" className="container mx-auto mt-20 px-10">
             <h2 className="mb-5 text-2xl text-title-color">Sobre la empresa</h2>
             <p className="leading-tight">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam

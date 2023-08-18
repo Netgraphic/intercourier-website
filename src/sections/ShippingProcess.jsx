@@ -4,7 +4,10 @@ import ThirdStepIcon from "../components/icons/ThirdStepIcon";
 
 const ShippingProcess = () => {
     return (
-        <section id="shipping-process" className="container mt-28 px-10">
+        <section
+            id="shipping-process"
+            className="container mx-auto mt-28 px-10"
+        >
             <h2 className="mb-5 text-2xl text-title-color">Proceso de envío</h2>
             <ol>
                 <li>

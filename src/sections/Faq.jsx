@@ -33,7 +33,7 @@ const Faq = () => {
     );
 
     return (
-        <section id="faq" className="container mt-16 px-10">
+        <section id="faq" className="container mx-auto mt-16 px-10">
             <h2 className="mb-5 text-2xl text-title-color">
                 Preguntas Frecuentes
             </h2>

@@ -1,14 +1,18 @@
+import { forwardRef } from "react";
 import SearchIcon from "./icons/SearchIcon";
 
-const TabTracking = ({ tab }) => {
+const TabTracking = forwardRef(({ tab }, tabContainer1) => {
     return (
         <div
-            className={`absolute left-[50%] top-0 w-full translate-x-[-50%] px-5 transition-all duration-200 ease-in-out ${
+            className={`absolute top-0 w-full px-5 transition-all duration-200 ease-in-out ${
                 tab === 1 ? "visible opacity-100" : "invisible opacity-0"
             }`}
         >
             <form>
-                <div className="border-main-color relative -top-8 mx-auto flex w-full justify-between rounded-xl border-4 bg-white p-2 text-gray-500">
+                <div
+                    ref={tabContainer1}
+                    className="relative -top-8 flex w-full justify-between rounded-xl border-4 border-main-color bg-white p-2 text-gray-500"
+                >
                     <input
                         type="text"
                         placeholder="Ingrese número de envío..."
@@ -16,7 +20,7 @@ const TabTracking = ({ tab }) => {
                     />
                     <button
                         type="submit"
-                        className="bg-main-color inline-block h-[42px] w-[55px] rounded-xl p-2 text-center"
+                        className="inline-block h-[42px] w-[55px] rounded-xl bg-main-color p-2 text-center"
                     >
                         <SearchIcon />
                     </button>
@@ -24,6 +28,6 @@ const TabTracking = ({ tab }) => {
             </form>
         </div>
     );
-};
+});
 
 export default TabTracking;
