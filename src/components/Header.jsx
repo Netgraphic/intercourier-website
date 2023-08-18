@@ -8,7 +8,7 @@ import InstagramIcon from "./icons/InstagramIcon";
 import PhoneIcon from "./icons/PhoneIcon";
 import EmailIcon from "./icons/EmailIcon";
 
-const Header = () => {
+const Header = ({ displayTab }) => {
     const links = [
         { name: "Seguimiento", path: "tabs" },
         { name: "Hacer envío", path: "tabs" },
@@ -52,6 +52,10 @@ const Header = () => {
                             spy
                             offset={-90}
                             to={link.path}
+                            onClick={() => {
+                                displayTab(index + 1);
+                                setIsOpen(!isOpen);
+                            }}
                             className="mb-8 block cursor-pointer md:mb-0 md:ml-5 md:inline-block"
                         >
                             {link.name}

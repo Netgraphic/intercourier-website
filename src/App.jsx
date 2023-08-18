@@ -14,12 +14,14 @@ const App = () => {
     const [tab, setTab] = useState(1);
 
     const displayTab = (tabIndex) => {
-        setTab(tabIndex);
+        if (tabIndex <= 3) {
+            setTab(tabIndex);
+        }
     };
 
     return (
         <>
-            <Header />
+            <Header displayTab={displayTab} />
 
             <Banner />
 
