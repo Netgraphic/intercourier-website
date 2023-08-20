@@ -1,7 +1,6 @@
-import { forwardRef } from "react";
 import SearchIcon from "./icons/SearchIcon";
 
-const TabTracking = forwardRef(({ tab }, tabContainer1) => {
+const TabTracking = ({ tab }) => {
     return (
         <div
             className={`absolute top-0 w-full px-5 transition-all duration-200 ease-in-out ${
@@ -9,10 +8,7 @@ const TabTracking = forwardRef(({ tab }, tabContainer1) => {
             }`}
         >
             <form>
-                <div
-                    ref={tabContainer1}
-                    className="relative -top-8 flex w-full justify-between rounded-xl border-4 border-main-color bg-white p-2 text-gray-500"
-                >
+                <div className="relative -top-8 flex w-full justify-between rounded-xl border-4 border-main-color bg-white p-2 text-gray-500">
                     <input
                         type="text"
                         placeholder="Ingrese número de envío..."
@@ -28,6 +24,6 @@ const TabTracking = forwardRef(({ tab }, tabContainer1) => {
             </form>
         </div>
     );
-});
+};
 
 export default TabTracking;

@@ -15,22 +15,38 @@ const Footer = () => {
                         href="https://www.instagram.com/intercourierchile/"
                         target="_blank"
                     >
-                        <InstagramIcon width="35" stroke="#fff" />
+                        <InstagramIcon
+                            width="35"
+                            stroke="#fff"
+                            className="m-auto"
+                        />
                         Instagram
                     </a>
                     <a
                         href="https://www.instagram.com/intercourierchile/"
                         target="_blank"
                     >
-                        <FacebookIcon width="32" stroke="#fff" />
+                        <FacebookIcon
+                            width="32"
+                            stroke="#fff"
+                            className="m-auto"
+                        />
                         Facebook
                     </a>
                     <div>
-                        <PhoneIcon width="36" stroke="#fff" />
+                        <PhoneIcon
+                            width="36"
+                            stroke="#fff"
+                            className="m-auto"
+                        />
                         Teléfono
                     </div>
                     <div>
-                        <EmailIcon width="36" stroke="#fff" />
+                        <EmailIcon
+                            width="36"
+                            stroke="#fff"
+                            className="m-auto"
+                        />
                         Email
                     </div>
                 </div>

@@ -1,12 +1,216 @@
-import { forwardRef } from "react";
+import { forwardRef, useRef } from "react";
+import { useForm } from "react-hook-form";
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
 
-const TabShipping = forwardRef(({ tab }, tabContainer2) => {
+import StepOrder from "./steps/StepOrder";
+import StepSender from "./steps/StepSender";
+import StepRecipient from "./steps/StepRecipient";
+import StepPackage from "./steps/StepPackage";
+import StepPayment from "./steps/StepPayment";
+import StepSummary from "./steps/StepSummary";
+
+import { comunasSantiago } from "../utilities/comunas";
+
+const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+        setError,
+        clearErrors,
+        setValue,
+        getValues,
+    } = useForm({
+        defaultValues: {
+            orderType: "Web",
+            fullnameSender: "",
+            addressSender: "",
+            zoneSender: "",
+            comunaSender: "",
+            emailSender: "",
+            fullnameRecipient: "",
+            addressRecipient: "",
+            zoneRecipient: "",
+            comunaRecipient: "",
+            emailRecipient: "",
+        },
+    });
+
+    const [
+        fullnameSender,
+        addressSender,
+        zoneSender,
+        comunaSender,
+        emailSender,
+        fullnameRecipient,
+        addressRecipient,
+        zoneRecipient,
+        comunaRecipient,
+        emailRecipient,
+    ] = watch([
+        "fullnameSender",
+        "addressSender",
+        "zoneSender",
+        "comunaSender",
+        "emailSender",
+        "fullnameRecipient",
+        "addressRecipient",
+        "zoneRecipient",
+        "comunaRecipient",
+        "emailRecipient",
+    ]);
+
+    const formWizardRef = useRef(null);
+
+    const validateEmail = (emailSender) => {
+        return emailSender.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
+
+    const checkEmail = () => {
+        if (!validateEmail(emailSender)) {
+            return false;
+        }
+
+        return true;
+    };
+
+    const checkValidateTabSender = () => {
+        let validEmail = checkEmail();
+
+        if (
+            fullnameSender === "" ||
+            addressSender === "" ||
+            zoneSender === "" ||
+            comunaSender === "" ||
+            emailSender === "" ||
+            !validEmail
+        ) {
+            return false;
+        }
+
+        return true;
+    };
+
+    const errorMessagesSender = () => {
+        let validEmail = checkEmail();
+
+        if (fullnameSender === "") {
+            setError("fullnameSender", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (addressSender === "") {
+            setError("addressSender", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (zoneSender === "") {
+            setError("zoneSender", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (comunaSender === "") {
+            setError("comunaSender", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (emailSender === "") {
+            setError("emailSender", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (emailSender !== "" && !validEmail) {
+            setError("emailSender", {
+                type: "custom",
+                message: "Formato de email incorrecto",
+            });
+        }
+    };
+
+    const checkValidateTabRecipient = () => {
+        let validEmail = checkEmail();
+
+        if (
+            fullnameRecipient === "" ||
+            addressRecipient === "" ||
+            zoneRecipient === "" ||
+            comunaRecipient === "" ||
+            emailRecipient === "" ||
+            !validEmail
+        ) {
+            return false;
+        }
+
+        return true;
+    };
+
+    const errorMessagesRecipient = () => {
+        let validEmail = checkEmail();
+
+        if (fullnameRecipient === "") {
+            setError("fullnameRecipient", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (addressRecipient === "") {
+            setError("addressRecipient", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (zoneRecipient === "") {
+            setError("zoneRecipient", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (comunaRecipient === "") {
+            setError("comunaRecipient", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (emailRecipient === "") {
+            setError("emailRecipient", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+
+        if (emailRecipient !== "" && !validEmail) {
+            setError("emailRecipient", {
+                type: "custom",
+                message: "Formato de email incorrecto",
+            });
+        }
+    };
+
+    const onSubmit = (data) => console.log(data);
+
     const backTemplate = (handlePrevious) => {
         return (
             <button
-                className="mr-2 rounded-3xl border-2 border-main-color px-8 py-2 text-main-color"
+                type="button"
+                className="mr-4 rounded-3xl border-2 border-main-color px-8 py-2 text-main-color"
                 onClick={handlePrevious}
             >
                 Anterior
@@ -14,9 +218,15 @@ const TabShipping = forwardRef(({ tab }, tabContainer2) => {
         );
     };
 
-    const nextTemplate = (handleNext) => {
+    const nextTemplate = () => {
+        const handleNext = () => {
+            clearErrors();
+            formWizardRef.current?.nextTab();
+        };
+
         return (
             <button
+                type="button"
                 className="rounded-3xl border-2 border-main-color bg-main-color px-8 py-2 text-white"
                 onClick={handleNext}
             >
@@ -25,11 +235,11 @@ const TabShipping = forwardRef(({ tab }, tabContainer2) => {
         );
     };
 
-    const finishTemplate = (handleComplete) => {
+    const finishTemplate = () => {
         return (
             <button
+                type="submit"
                 className="rounded-3xl border-2 border-main-color bg-main-color px-8 py-2 text-white"
-                onClick={handleComplete}
             >
                 Finalizar
             </button>
@@ -43,11 +253,12 @@ const TabShipping = forwardRef(({ tab }, tabContainer2) => {
             }`}
         >
             <div
-                ref={tabContainer2}
+                ref={tabContainerShipping}
                 className="container relative -top-8 mx-auto rounded-xl bg-white px-5"
             >
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <FormWizard
+                        ref={formWizardRef}
                         stepSize="xs"
                         color="#d15e49"
                         backButtonTemplate={backTemplate}
@@ -55,66 +266,62 @@ const TabShipping = forwardRef(({ tab }, tabContainer2) => {
                         finishButtonTemplate={finishTemplate}
                     >
                         <FormWizard.TabContent>
-                            <h3 className="text-left">Tipo de orden</h3>
-                            <div className="w-full">
-                                <input
-                                    id="order-website"
-                                    type="radio"
-                                    name="order-type"
-                                    className=""
-                                />
-                                <label htmlFor="order-website">
-                                    Hacer orden en el sitio web
-                                </label>
-                            </div>
-                            <div className="w-full">
-                                <input
-                                    id="order-whatsapp"
-                                    type="radio"
-                                    name="order-type"
-                                    className=""
-                                />
-                                <label htmlFor="order-whatsapp">
-                                    Hacer orden vía Whatsapp
-                                </label>
-                            </div>
-                            <div className="w-full">
-                                <input
-                                    id="order-instagram"
-                                    type="radio"
-                                    name="order-type"
-                                    className=""
-                                />
-                                <label htmlFor="order-instagram">
-                                    Hacer orden vía Instagram
-                                </label>
-                            </div>
+                            <StepOrder
+                                tabContainerShipping={tabContainerShipping}
+                                register={register}
+                            />
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent>
-                            <h3 className="text-left">
-                                Información del remitente
-                            </h3>
+                            <StepSender
+                                tabContainerShipping={tabContainerShipping}
+                                register={register}
+                                errors={errors}
+                                setError={setError}
+                                clearErrors={clearErrors}
+                                comunasSantiago={comunasSantiago}
+                                setValue={setValue}
+                                getValues={getValues}
+                                validateEmail={validateEmail}
+                            />
+                        </FormWizard.TabContent>
+
+                        <FormWizard.TabContent
+                            isValid={checkValidateTabSender()}
+                            validationError={errorMessagesSender}
+                        >
+                            <StepRecipient
+                                tabContainerShipping={tabContainerShipping}
+                                register={register}
+                                errors={errors}
+                                setError={setError}
+                                clearErrors={clearErrors}
+                                comunasSantiago={comunasSantiago}
+                                setValue={setValue}
+                                getValues={getValues}
+                                validateEmail={validateEmail}
+                            />
+                        </FormWizard.TabContent>
+
+                        <FormWizard.TabContent
+                            isValid={checkValidateTabRecipient()}
+                            validationError={errorMessagesRecipient}
+                        >
+                            <StepPackage
+                                tabContainerShipping={tabContainerShipping}
+                                register={register}
+                            />
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent>
-                            <h3 className="text-left">
-                                Información del destinatario
-                            </h3>
+                            <StepPayment
+                                tabContainerShipping={tabContainerShipping}
+                                register={register}
+                            />
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent>
-                            <h3 className="text-left">
-                                Información del paquete
-                            </h3>
-                        </FormWizard.TabContent>
-
-                        <FormWizard.TabContent>
-                            <h3 className="text-left">Tipo de pago</h3>
-                        </FormWizard.TabContent>
-
-                        <FormWizard.TabContent>
-                            <h3 className="text-left">Resumen de la orden</h3>
+                            <StepSummary />
                         </FormWizard.TabContent>
                     </FormWizard>
                 </form>

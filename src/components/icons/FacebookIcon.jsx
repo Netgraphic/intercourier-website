@@ -12,7 +12,6 @@ const FacebookIcon = ({ width = "40", ...props }) => {
                 strokeWidth: "2",
                 strokeLinecap: "round",
                 strokeLinejoin: "round",
-                margin: "auto",
             }}
         >
             <path

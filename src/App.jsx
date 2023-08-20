@@ -1,22 +1,23 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import Header from "./components/Header";
 import Banner from "./components/Banner";
 import Tabs from "./components/Tabs";
+import Footer from "./components/Footer";
 
 import ShippingProcess from "./sections/ShippingProcess";
 import About from "./sections/About";
 import SantiagoIcon from "./components/icons/SantiagoIcon";
 import Faq from "./sections/Faq";
-import Footer from "./components/Footer";
+
+import { FormWizardContext } from "./context/FormWizardProvider";
 
 const App = () => {
     const [tab, setTab] = useState(1);
-    const [height, setHeight] = useState(0);
+    const { setHeight } = useContext(FormWizardContext);
 
-    const tabContainer1 = useRef(null);
-    const tabContainer2 = useRef(null);
-    const tabContainer3 = useRef(null);
+    const tabContainerShipping = useRef(null);
+    const tabContainerPricing = useRef(null);
 
     const displayTab = (tabIndex) => {
         if (tabIndex <= 3) {
@@ -24,18 +25,15 @@ const App = () => {
 
             switch (tabIndex) {
                 case 1:
-                    setHeight(tabContainer1.current.clientHeight);
-                    console.log("Tab: " + height);
+                    setHeight(0);
                     break;
 
                 case 2:
-                    setHeight(tabContainer2.current.clientHeight);
-                    console.log("Tab: " + height);
+                    setHeight(tabContainerShipping.current.clientHeight);
                     break;
 
                 case 3:
-                    setHeight(tabContainer3.current.clientHeight);
-                    console.log("Tab: " + height);
+                    setHeight(tabContainerPricing.current.clientHeight);
                     break;
 
                 default:
@@ -53,8 +51,7 @@ const App = () => {
             <Tabs
                 displayTab={displayTab}
                 tab={tab}
-                height={height}
-                ref={{ tabContainer1, tabContainer2, tabContainer3 }}
+                ref={{ tabContainerShipping, tabContainerPricing }}
             />
 
             <div className="relative mx-auto mt-32">

@@ -68,16 +68,19 @@ const Header = ({ displayTab }) => {
                                 href="https://www.instagram.com/intercourierchile/"
                                 target="_blank"
                             >
-                                <InstagramIcon stroke="#D15E49" />
+                                <InstagramIcon
+                                    stroke="#D15E49"
+                                    className="m-auto"
+                                />
                                 Instagram
                             </a>
                         </div>
                         <div>
-                            <PhoneIcon stroke="#D15E49" />
+                            <PhoneIcon stroke="#D15E49" className="m-auto" />
                             Teléfono
                         </div>
                         <div>
-                            <EmailIcon stroke="#D15E49" />
+                            <EmailIcon stroke="#D15E49" className="m-auto" />
                             Email
                         </div>
                     </div>

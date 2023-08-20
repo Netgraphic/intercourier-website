@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-const TabPricing = forwardRef(({ tab }, tabContainer3) => {
+const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
     return (
         <div
             className={`container absolute top-0 px-5 transition-all duration-200 ease-in-out ${
@@ -8,7 +8,7 @@ const TabPricing = forwardRef(({ tab }, tabContainer3) => {
             }`}
         >
             <div
-                ref={tabContainer3}
+                ref={tabContainerPricing}
                 className="container relative -top-8 mx-auto rounded-xl bg-white px-5"
             >
                 Tab 3

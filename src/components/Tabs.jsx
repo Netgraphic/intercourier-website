@@ -1,14 +1,15 @@
-import { forwardRef } from "react";
+import { forwardRef, useContext } from "react";
 
 import TabShipping from "./TabShipping";
 import TabTracking from "./TabTracking";
 import TabPricing from "./TabPricing";
 
+import { FormWizardContext } from "../context/FormWizardProvider";
+
 const Tabs = forwardRef(
-    (
-        { displayTab, tab, height },
-        { tabContainer1, tabContainer2, tabContainer3 }
-    ) => {
+    ({ displayTab, tab }, { tabContainerShipping, tabContainerPricing }) => {
+        const { height } = useContext(FormWizardContext);
+
         return (
             <section id="tabs" className="bg-main-color">
                 <div className="container mx-auto flex justify-center gap-5 pb-12 pt-5 text-white">
@@ -34,11 +35,11 @@ const Tabs = forwardRef(
 
                 <div
                     className="container relative mx-auto"
-                    style={{ minHeight: height + "px" }}
+                    style={{ height: height + "px" }}
                 >
-                    <TabTracking tab={tab} ref={tabContainer1} />
-                    <TabShipping tab={tab} ref={tabContainer2} />
-                    <TabPricing tab={tab} ref={tabContainer3} />
+                    <TabTracking tab={tab} />
+                    <TabShipping tab={tab} ref={tabContainerShipping} />
+                    <TabPricing tab={tab} ref={tabContainerPricing} />
                 </div>
             </section>
         );
