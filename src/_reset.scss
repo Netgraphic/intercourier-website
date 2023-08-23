@@ -14,3 +14,99 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+.react-datepicker {
+    color: #666;
+    font-family: "Palanquin Dark", serif;
+    border: 2px solid $mainColor;
+    border-radius: 20px;
+
+    .react-datepicker__header {
+        background: #fff;
+        border: none;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+    }
+}
+
+.react-datepicker-popper[data-placement^="bottom"]
+    .react-datepicker__triangle::after {
+    border-bottom-color: #fff;
+}
+
+.react-datepicker-popper[data-placement^="top"]
+    .react-datepicker__triangle::before {
+    border-top-color: $mainColor;
+}
+
+.react-datepicker-popper[data-placement^="bottom"]
+    .react-datepicker__triangle::before {
+    border-bottom-color: $mainColor;
+}
+
+.react-datepicker__current-month {
+    text-transform: capitalize;
+    color: $secondaryColor;
+    font-weight: normal;
+    font-size: 18px !important;
+}
+
+.react-datepicker__day-name {
+    text-transform: capitalize;
+    color: $mainColor;
+
+    &:nth-child(n + 6) {
+        color: $secondaryColor;
+    }
+}
+
+.react-datepicker__navigation {
+    top: 6px;
+}
+
+.react-datepicker__navigation-icon::before {
+    top: 12px;
+    border-color: $secondaryColor !important;
+}
+
+.react-datepicker-popper[data-placement^="bottom"]
+    .react-datepicker__triangle::after {
+    top: 2px;
+}
+
+.react-datepicker-popper[data-placement^="top"]
+    .react-datepicker__triangle::after {
+    bottom: 2px;
+}
+
+.react-datepicker__input-container input {
+    padding: 0.5rem;
+}
+
+.react-datepicker__close-icon::after {
+    background: $secondaryColor;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 22px;
+    vertical-align: top;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.react-datepicker__day--selected {
+    background: $secondaryColor;
+    color: #fff !important;
+    font-weight: normal;
+}
+
+.react-datepicker__day--keyboard-selected {
+    background: none;
+}
+
+.react-datepicker__day--today {
+    font-weight: normal;
+    color: $secondaryColor;
+}

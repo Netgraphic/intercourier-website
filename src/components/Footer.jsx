@@ -3,7 +3,7 @@ import { Link } from "react-scroll";
 import EmailIcon from "./icons/EmailIcon";
 import FacebookIcon from "./icons/FacebookIcon";
 import InstagramIcon from "./icons/InstagramIcon";
-import PhoneIcon from "./icons/PhoneIcon";
+import WhatsappIcon from "./icons/WhatsappIcon";
 
 const Footer = () => {
     return (
@@ -23,7 +23,7 @@ const Footer = () => {
                         Instagram
                     </a>
                     <a
-                        href="https://www.instagram.com/intercourierchile/"
+                        href="https://api.whatsapp.com/send?phone=56941347790"
                         target="_blank"
                     >
                         <FacebookIcon
@@ -33,14 +33,17 @@ const Footer = () => {
                         />
                         Facebook
                     </a>
-                    <div>
-                        <PhoneIcon
+                    <a
+                        href="https://api.whatsapp.com/send?phone=56941347790"
+                        target="_blank"
+                    >
+                        <WhatsappIcon
                             width="36"
                             stroke="#fff"
                             className="m-auto"
                         />
-                        Teléfono
-                    </div>
+                        Whatsapp
+                    </a>
                     <div>
                         <EmailIcon
                             width="36"

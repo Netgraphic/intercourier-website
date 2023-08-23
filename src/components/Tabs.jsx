@@ -29,7 +29,7 @@ const Tabs = forwardRef(
                         className={`cursor-pointer ${tab === 3 && "activeTab"}`}
                         onClick={() => displayTab(3)}
                     >
-                        Lista de precios
+                        Cotización
                     </a>
                 </div>
 

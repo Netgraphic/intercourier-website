@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const FormInputRadio = forwardRef(
-    ({ id, icon, label, name, value, onChange }, ref) => {
+    ({ id, icon, label, label2, name, value, onChange }, ref) => {
         return (
             <div className="w-full">
                 <input
@@ -15,11 +15,14 @@ const FormInputRadio = forwardRef(
                 />
                 <label
                     htmlFor={id}
-                    className="my-3 flex w-full cursor-pointer items-center justify-center rounded-xl border-2 border-secondary-color p-5 text-lg text-secondary-color peer-checked:bg-main-color peer-checked:text-white peer-checked:[&>div>svg]:stroke-white"
+                    className="flex w-full cursor-pointer items-center justify-center rounded-xl border-2 border-secondary-color px-3 py-5 text-lg text-secondary-color peer-checked:bg-main-color peer-checked:text-white peer-checked:[&>div>span>svg]:stroke-white"
                 >
-                    <div>
-                        {icon}
-                        {label}
+                    <div className="text-center">
+                        <span className="text-7xl">{icon}</span>
+                        <div className={`${label2 ? "text-xs" : "text-lg"}`}>
+                            {label}
+                        </div>
+                        {label2 && <div className="mt-2 text-xs">{label2}</div>}
                     </div>
                 </label>
             </div>

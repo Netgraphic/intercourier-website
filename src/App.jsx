@@ -56,7 +56,7 @@ const App = () => {
 
             <div className="relative mx-auto mt-32">
                 <div className="santiago-map container px-5 text-4xl leading-none text-title-color">
-                    Envíos por todo Santiago
+                    Envíos a gran parte de Santiago
                     <figure className="absolute -top-12 right-5 z-[-1] w-2/4">
                         <SantiagoIcon />
                     </figure>

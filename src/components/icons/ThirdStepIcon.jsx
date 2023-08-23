@@ -1,11 +1,11 @@
-const ThirdStepIcon = () => {
+const ThirdStepIcon = ({ width }) => {
     return (
         <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             viewBox="0 0 56.78 48.75"
-            width="150"
+            width={width}
             style={{
                 fill: "none",
                 stroke: "#D15E49",

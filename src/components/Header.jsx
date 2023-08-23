@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import InstagramIcon from "./icons/InstagramIcon";
-import PhoneIcon from "./icons/PhoneIcon";
+import WhatsappIcon from "./icons/WhatsappIcon";
 import EmailIcon from "./icons/EmailIcon";
 
 const Header = ({ displayTab }) => {
     const links = [
         { name: "Seguimiento", path: "tabs" },
         { name: "Hacer envío", path: "tabs" },
-        { name: "Lista de precios", path: "tabs" },
+        { name: "Cotización", path: "tabs" },
         { name: "Proceso de envío", path: "shipping-process" },
         { name: "Sobre la empresa", path: "about" },
         { name: "Preguntas Frecuentes", path: "faq" },
@@ -76,11 +76,23 @@ const Header = ({ displayTab }) => {
                             </a>
                         </div>
                         <div>
-                            <PhoneIcon stroke="#D15E49" className="m-auto" />
-                            Teléfono
+                            <a
+                                href="https://api.whatsapp.com/send?phone=56941347790"
+                                target="_blank"
+                            >
+                                <WhatsappIcon
+                                    stroke="#D15E49"
+                                    className="m-auto"
+                                />
+                                Whatsapp
+                            </a>
                         </div>
                         <div>
-                            <EmailIcon stroke="#D15E49" className="m-auto" />
+                            <EmailIcon
+                                stroke="#D15E49"
+                                className="m-auto"
+                                width="42"
+                            />
                             Email
                         </div>
                     </div>

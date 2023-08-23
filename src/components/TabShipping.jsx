@@ -13,6 +13,8 @@ import StepSummary from "./steps/StepSummary";
 import { comunasSantiago } from "../utilities/comunas";
 
 const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
+    const date = new Date();
+
     const {
         register,
         handleSubmit,
@@ -35,6 +37,12 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
             zoneRecipient: "",
             comunaRecipient: "",
             emailRecipient: "",
+            packageSize: "S",
+            packageContents: "",
+            expressDelivery: false,
+            customDeliveryTime: false,
+            deliveryDate: date.setDate(date.getDate() + 1),
+            paymentMethod: "Online",
         },
     });
 
@@ -49,6 +57,9 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         zoneRecipient,
         comunaRecipient,
         emailRecipient,
+        packageContents,
+        expressDelivery,
+        customDeliveryTime,
     ] = watch([
         "fullnameSender",
         "addressSender",
@@ -60,6 +71,9 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         "zoneRecipient",
         "comunaRecipient",
         "emailRecipient",
+        "packageContents",
+        "expressDelivery",
+        "customDeliveryTime",
     ]);
 
     const formWizardRef = useRef(null);
@@ -204,9 +218,32 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         }
     };
 
+    const checkValidateTabPackage = () => {
+        if (packageContents === "") {
+            return false;
+        }
+
+        return true;
+    };
+
+    const errorMessagesPackage = () => {
+        if (packageContents === "") {
+            setError("packageContents", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
+    };
+
     const onSubmit = (data) => console.log(data);
 
-    const backTemplate = (handlePrevious) => {
+    const backTemplate = () => {
+        const handlePrevious = () => {
+            let scrollDiv = tabContainerShipping.current.offsetTop + 250;
+            window.scrollTo({ top: scrollDiv, behavior: "smooth" });
+            clearErrors();
+            formWizardRef.current?.prevTab();
+        };
         return (
             <button
                 type="button"
@@ -220,6 +257,8 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
 
     const nextTemplate = () => {
         const handleNext = () => {
+            let scrollDiv = tabContainerShipping.current.offsetTop + 250;
+            window.scrollTo({ top: scrollDiv, behavior: "smooth" });
             clearErrors();
             formWizardRef.current?.nextTab();
         };
@@ -310,10 +349,18 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                             <StepPackage
                                 tabContainerShipping={tabContainerShipping}
                                 register={register}
+                                errors={errors}
+                                getValues={getValues}
+                                setValue={setValue}
+                                expressDelivery={expressDelivery}
+                                customDeliveryTime={customDeliveryTime}
                             />
                         </FormWizard.TabContent>
 
-                        <FormWizard.TabContent>
+                        <FormWizard.TabContent
+                            isValid={checkValidateTabPackage()}
+                            validationError={errorMessagesPackage}
+                        >
                             <StepPayment
                                 tabContainerShipping={tabContainerShipping}
                                 register={register}
@@ -321,7 +368,10 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent>
-                            <StepSummary />
+                            <StepSummary
+                                tabContainerShipping={tabContainerShipping}
+                                getValues={getValues}
+                            />
                         </FormWizard.TabContent>
                     </FormWizard>
                 </form>

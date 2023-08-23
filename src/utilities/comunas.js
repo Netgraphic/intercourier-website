@@ -26,8 +26,6 @@ export const comunasSantiago = (zone) => {
     const comunasSur = [
         "El Bosque",
         "La Cisterna",
-        "La Granja",
-        "La Pintana",
         "Lo Espejo",
         "Pedro Aguirre Cerda",
         "San Joaquín",
@@ -40,19 +38,8 @@ export const comunasSantiago = (zone) => {
         "Peñalolén",
         "Macul",
         "Puente Alto",
-        "San José de Maipo",
-        "Pirque",
     ];
-    const comunasSurponiente = [
-        "Maipú",
-        "Estación Central",
-        "Cerrillos",
-        "El Monte",
-        "Isla de Maipo",
-        "Padre Hurtado",
-        "Peñaflor",
-        "Talagante",
-    ];
+    const comunasSurponiente = ["Maipú", "Estación Central", "Cerrillos"];
 
     switch (zone) {
         case "Norte":
