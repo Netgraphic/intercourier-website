@@ -1,10 +1,14 @@
-import { forwardRef, useContext } from "react";
+import { forwardRef, useContext, useState } from "react";
 import { FormWizardContext } from "../context/FormWizardProvider";
 import { pricePackages } from "../utilities/pricePackages";
 import ShippingPrice from "./ShippingPrice";
 
 const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
-    const { price, setPrice, formatPrice } = useContext(FormWizardContext);
+    const { formatPrice } = useContext(FormWizardContext);
+    const [price, setPrice] = useState({
+        packageSize: "S",
+        packagePrice: 2000,
+    });
 
     const checkPackageSize = (size, priceSize) => {
         setPrice({ ...price, packageSize: size, packagePrice: priceSize });
@@ -154,7 +158,7 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                     </div>
                 </div>
 
-                <ShippingPrice price={price.packagePrice} />
+                <ShippingPrice price={formatPrice(price.packagePrice)} />
             </div>
         </div>
     );

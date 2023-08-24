@@ -5,7 +5,7 @@ import FacebookIcon from "./icons/FacebookIcon";
 import InstagramIcon from "./icons/InstagramIcon";
 import WhatsappIcon from "./icons/WhatsappIcon";
 
-const Footer = () => {
+const Footer = ({ props }) => {
     return (
         <footer className="mt-28 bg-main-color p-7 text-center text-white">
             <div className="container mx-auto">
@@ -63,6 +63,12 @@ const Footer = () => {
                         Preguntas Frecuentes
                     </Link>
                 </div>
+                <a
+                    className="mt-5 block cursor-pointer text-lg"
+                    onClick={() => props.setOpenModal("termsConditions")}
+                >
+                    Términos y Condiciones
+                </a>
                 <address>
                     Website design by Natalia Botko & developed by Diego Moris
                 </address>

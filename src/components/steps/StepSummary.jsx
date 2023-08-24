@@ -99,6 +99,25 @@ const StepSummary = (props) => {
                 title="Información del pago"
                 fields={fieldsPayment}
             />
+
+            {props.getValues("paymentMethod") === "Transferencia" && (
+                <>
+                    <h4 className="mb-1 text-lg text-secondary-color">
+                        Datos de la cuenta
+                    </h4>
+                    <ul className="text-sm [&>li:last-child]:mb-0 [&>li]:mb-1">
+                        <li className="uppercase">
+                            Sociedad de inversiones jm spa
+                        </li>
+                        <li>RUT: 77.289.443-0</li>
+                        <li className="uppercase">
+                            Cuenta corriente Banco Itau
+                        </li>
+                        <li>Número: 0221341785</li>
+                        <li>Email: pagos@intercourier.cl</li>
+                    </ul>
+                </>
+            )}
         </>
     );
 };

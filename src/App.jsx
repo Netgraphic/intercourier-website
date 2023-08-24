@@ -11,6 +11,7 @@ import SantiagoIcon from "./components/icons/SantiagoIcon";
 import Faq from "./sections/Faq";
 
 import { FormWizardContext } from "./context/FormWizardProvider";
+import ModalTermsService from "./components/ModalTermsService";
 
 const App = () => {
     const [tab, setTab] = useState(1);
@@ -18,6 +19,9 @@ const App = () => {
 
     const tabContainerShipping = useRef(null);
     const tabContainerPricing = useRef(null);
+
+    const [openModal, setOpenModal] = useState(undefined);
+    const props = { openModal, setOpenModal };
 
     const displayTab = (tabIndex) => {
         if (tabIndex <= 3) {
@@ -44,7 +48,7 @@ const App = () => {
 
     return (
         <>
-            <Header displayTab={displayTab} />
+            <Header displayTab={displayTab} props={props} />
 
             <Banner />
 
@@ -69,7 +73,13 @@ const App = () => {
 
             <Faq />
 
-            <Footer />
+            <Footer props={props} />
+
+            <ModalTermsService
+                props={props}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+            />
         </>
     );
 };

@@ -12,7 +12,7 @@ const TabTracking = ({ tab }) => {
                     <input
                         type="text"
                         placeholder="Ingrese número de envío..."
-                        className="w-4/5 border-none px-3 outline-none"
+                        className="w-4/5 border-none px-3 outline-none focus:ring-transparent"
                     />
                     <button
                         type="submit"

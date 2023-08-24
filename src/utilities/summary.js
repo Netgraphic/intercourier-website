@@ -68,12 +68,12 @@ export const packageSummary = (size, content, expressDelivery) => {
 export const paymentSummary = (payment, price) => {
     return [
         {
-            name: "Forma de pago",
-            value: payment,
-        },
-        {
             name: "Total a pagar",
             value: "$" + price,
+        },
+        {
+            name: "Forma de pago",
+            value: payment,
         },
     ];
 };
