@@ -14,13 +14,11 @@ const StepOrder = (props) => {
         <WebIcon width="42" className="mx-auto mb-2 stroke-secondary-color" />
     );
 
-    const checkValue = (e) => {
-        let value = e.target.value;
-
+    const openApp = (value) => {
         switch (value) {
             case "Whatsapp":
                 return (window.location.href =
-                    "https://api.whatsapp.com/send?phone=56941347790");
+                    "whatsapp://send?phone=56941347790");
 
             case "Instagram":
                 return (window.location.href =
@@ -45,6 +43,7 @@ const StepOrder = (props) => {
                     icon={iconWeb}
                     label="Hacer orden vía sitio web"
                     value="Web"
+                    onClick={(e) => props.setOrderValue(e.target.value)}
                     {...props.register("orderType")}
                 />
 
@@ -55,7 +54,8 @@ const StepOrder = (props) => {
                         type="radio"
                         name="orderType"
                         value="Whatsapp"
-                        onChange={checkValue}
+                        onClick={(e) => openApp(e.target.value)}
+                        onChange={(e) => props.setOrderValue(e.target.value)}
                     />
                     <label
                         htmlFor="order-whatsapp"
@@ -82,7 +82,8 @@ const StepOrder = (props) => {
                         type="radio"
                         name="orderType"
                         value="Instagram"
-                        onChange={checkValue}
+                        onClick={(e) => openApp(e.target.value)}
+                        onChange={(e) => props.setOrderValue(e.target.value)}
                     />
                     <label
                         htmlFor="order-instagram"

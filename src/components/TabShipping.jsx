@@ -1,4 +1,4 @@
-import { forwardRef, useRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
@@ -11,6 +11,8 @@ import StepPayment from "./steps/StepPayment";
 import StepSummary from "./steps/StepSummary";
 
 import { comunasSantiago } from "../utilities/comunas";
+import { pricePackages } from "../utilities/pricePackages";
+import { format } from "date-fns";
 
 const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
     const date = new Date();
@@ -38,10 +40,11 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
             comunaRecipient: "",
             emailRecipient: "",
             packageSize: "S",
+            shippingPrice: pricePackages.sizeS,
             packageContents: "",
             expressDelivery: false,
             customDeliveryTime: false,
-            deliveryDate: date.setDate(date.getDate() + 1),
+            deliveryDate: date.setDate(date.getDate() + 2),
             paymentMethod: "Online",
         },
     });
@@ -75,6 +78,28 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         "expressDelivery",
         "customDeliveryTime",
     ]);
+
+    const [orderValue, setOrderValue] = useState("Web");
+
+    useEffect(() => {
+        if (localStorage.getItem("deliveryDate") !== null) {
+            localStorage.setItem("deliveryDate", date);
+        }
+
+        switch (orderValue) {
+            case "Whatsapp":
+                window.location.href = "whatsapp://send?phone=56941347790";
+                break;
+
+            case "Instagram":
+                window.location.href =
+                    "https://www.instagram.com/intercourierchile/";
+                break;
+
+            default:
+                break;
+        }
+    }, [orderValue]);
 
     const formWizardRef = useRef(null);
 
@@ -235,7 +260,12 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         }
     };
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        //Save the date in the right format
+        let date = format(getValues("deliveryDate"), "dd/MM/yyyy");
+        data.deliveryDate = date;
+        console.log(data);
+    };
 
     const backTemplate = () => {
         const handlePrevious = () => {
@@ -264,13 +294,15 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         };
 
         return (
-            <button
-                type="button"
-                className="rounded-3xl border-2 border-main-color bg-main-color px-8 py-2 text-white"
-                onClick={handleNext}
-            >
-                Siguiente
-            </button>
+            orderValue === "Web" && (
+                <button
+                    type="button"
+                    className="rounded-3xl border-2 border-main-color bg-main-color px-8 py-2 text-white"
+                    onClick={handleNext}
+                >
+                    Siguiente
+                </button>
+            )
         );
     };
 
@@ -308,6 +340,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                             <StepOrder
                                 tabContainerShipping={tabContainerShipping}
                                 register={register}
+                                setOrderValue={setOrderValue}
                             />
                         </FormWizard.TabContent>
 
@@ -326,7 +359,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent
-                            isValid={checkValidateTabSender()}
+                            /* isValid={checkValidateTabSender()} */
                             validationError={errorMessagesSender}
                         >
                             <StepRecipient
@@ -343,7 +376,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent
-                            isValid={checkValidateTabRecipient()}
+                            /* isValid={checkValidateTabRecipient()} */
                             validationError={errorMessagesRecipient}
                         >
                             <StepPackage
@@ -358,12 +391,13 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent
-                            isValid={checkValidateTabPackage()}
+                            /* isValid={checkValidateTabPackage()} */
                             validationError={errorMessagesPackage}
                         >
                             <StepPayment
                                 tabContainerShipping={tabContainerShipping}
                                 register={register}
+                                getValues={getValues}
                             />
                         </FormWizard.TabContent>
 

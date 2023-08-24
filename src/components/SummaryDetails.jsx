@@ -1,9 +1,9 @@
-const SummaryRecipient = ({ title, fieldsRecipient }) => {
+const SummaryDetails = ({ title, fields }) => {
     return (
         <article className="mb-3 border-b-2 border-main-color pb-3">
             <h5 className="text-lg text-secondary-color">{title}</h5>
             <ul className="border-gray-400 text-sm leading-tight [&>li:last-child]:border-b-0 [&>li]:border-b [&>li]:py-2">
-                {fieldsRecipient.map((item, index) => (
+                {fields.map((item, index) => (
                     <li key={index}>
                         <span className="mr-1 text-title-color">
                             {item.name}:
@@ -16,4 +16,4 @@ const SummaryRecipient = ({ title, fieldsRecipient }) => {
     );
 };
 
-export default SummaryRecipient;
+export default SummaryDetails;

@@ -1,23 +1,13 @@
-import { forwardRef, useState } from "react";
-
-import { comunasSantiago } from "../utilities/comunas";
+import { forwardRef, useContext } from "react";
+import { FormWizardContext } from "../context/FormWizardProvider";
+import { pricePackages } from "../utilities/pricePackages";
+import ShippingPrice from "./ShippingPrice";
 
 const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
-    const [packageSize, setPackageSize] = useState("S");
-    const [comunas, setComunas] = useState([]);
+    const { price, setPrice, formatPrice } = useContext(FormWizardContext);
 
-    const zones = [
-        "Centro",
-        "Norte",
-        "Nororiente",
-        "Norponiente",
-        "Sur",
-        "Suroriente",
-        "Surponiente",
-    ];
-
-    const checkPackageSize = (size) => {
-        setPackageSize(size);
+    const checkPackageSize = (size, priceSize) => {
+        setPrice({ ...price, packageSize: size, packagePrice: priceSize });
     };
 
     return (
@@ -46,9 +36,12 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             type="radio"
                             name="package-size"
                             value="S"
-                            checked={packageSize === "S"}
+                            checked={price.packageSize === "S"}
                             onChange={(e) => {
-                                checkPackageSize(e.target.value);
+                                checkPackageSize(
+                                    e.target.value,
+                                    pricePackages.sizeS
+                                );
                             }}
                         />
                         <label
@@ -74,9 +67,12 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             type="radio"
                             name="package-size"
                             value="M"
-                            checked={packageSize === "M"}
+                            checked={price.packageSize === "M"}
                             onChange={(e) => {
-                                checkPackageSize(e.target.value);
+                                checkPackageSize(
+                                    e.target.value,
+                                    pricePackages.sizeM
+                                );
                             }}
                         />
                         <label
@@ -102,9 +98,12 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             type="radio"
                             name="package-size"
                             value="L"
-                            checked={packageSize === "L"}
+                            checked={price.packageSize === "L"}
                             onChange={(e) => {
-                                checkPackageSize(e.target.value);
+                                checkPackageSize(
+                                    e.target.value,
+                                    pricePackages.sizeL
+                                );
                             }}
                         />
                         <label
@@ -130,9 +129,12 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             type="radio"
                             name="package-size"
                             value="XL"
-                            checked={packageSize === "XL"}
+                            checked={price.packageSize === "XL"}
                             onChange={(e) => {
-                                checkPackageSize(e.target.value);
+                                checkPackageSize(
+                                    e.target.value,
+                                    pricePackages.sizeXL
+                                );
                             }}
                         />
                         <label
@@ -152,42 +154,7 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                     </div>
                 </div>
 
-                <div className="mb-2 mt-8">
-                    <label className="mb-2 block text-xl">
-                        Seleccione sector
-                    </label>
-                    <select
-                        className="w-full rounded border border-main-color bg-white px-2 py-1 text-gray-500 focus:outline-secondary-color"
-                        onChange={(e) =>
-                            setComunas(comunasSantiago(e.target.value))
-                        }
-                    >
-                        <option value="">Seleccionar</option>
-                        {zones.map((zone, index) => (
-                            <option key={index} value={zone}>
-                                {zone}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="mb-2 mt-4">
-                    <label className="mb-2 block text-xl">
-                        Seleccione comuna
-                    </label>
-                    <select className="w-full rounded border border-main-color bg-white px-2 py-1 text-gray-500 focus:outline-secondary-color">
-                        <option value="">Seleccionar</option>
-                        {comunas.map((comuna, index) => (
-                            <option key={index} value={comuna}>
-                                {comuna}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="mb-2 mt-8 w-full border-t-2 border-secondary-color pt-2 text-2xl text-secondary-color">
-                    Total envío: <span>$10.000</span>
-                </div>
+                <ShippingPrice price={price.packagePrice} />
             </div>
         </div>
     );

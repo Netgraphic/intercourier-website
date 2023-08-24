@@ -33,10 +33,7 @@ const Footer = () => {
                         />
                         Facebook
                     </a>
-                    <a
-                        href="https://api.whatsapp.com/send?phone=56941347790"
-                        target="_blank"
-                    >
+                    <a href="whatsapp://send?phone=56941347790" target="_blank">
                         <WhatsappIcon
                             width="36"
                             stroke="#fff"

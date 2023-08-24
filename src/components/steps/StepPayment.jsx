@@ -6,9 +6,10 @@ import FormInputRadio from "./fields/FormInputRadio";
 import WebIcon from "../icons/WebIcon";
 import CardIcon from "../icons/CardIcon";
 import TransferIcon from "../icons/TransferIcon";
+import ShippingPrice from "../ShippingPrice";
 
 const StepPayment = (props) => {
-    const { setHeight } = useContext(FormWizardContext);
+    const { setHeight, formatPrice } = useContext(FormWizardContext);
 
     useEffect(() => {
         setHeight(props.tabContainerShipping.current.clientHeight);
@@ -59,9 +60,9 @@ const StepPayment = (props) => {
                 />
             </div>
 
-            <div className="mb-2 mt-8 w-full border-t-2 border-secondary-color pt-2 text-2xl text-secondary-color">
-                Total envío: <span>$10.000</span>
-            </div>
+            <ShippingPrice
+                price={formatPrice(props.getValues("shippingPrice"))}
+            />
         </>
     );
 };

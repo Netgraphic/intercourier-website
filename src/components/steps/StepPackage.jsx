@@ -1,18 +1,46 @@
 import { useContext, useEffect } from "react";
 import { FormWizardContext } from "../../context/FormWizardProvider";
+import { pricePackages } from "../../utilities/pricePackages";
 
 import FormInputRadio from "./fields/FormInputRadio";
 import FormTextArea from "./fields/FormTextArea";
 import FormError from "./fields/FormError";
 import FormDatepicker from "./fields/FormDatepicker";
 import FormToggle from "./fields/FormToggle";
+import ShippingPrice from "../ShippingPrice";
+import FormInputHidden from "./fields/FormInputHidden";
 
 const StepPackage = (props) => {
-    const { setHeight } = useContext(FormWizardContext);
+    const { setHeight, price, setPrice, formatPrice } =
+        useContext(FormWizardContext);
+
+    const updateShippingPrice = (packageSize) => {
+        switch (packageSize) {
+            case "S":
+                setPrice({ ...price, packagePrice: pricePackages.sizeS });
+                break;
+
+            case "M":
+                setPrice({ ...price, packagePrice: pricePackages.sizeM });
+                break;
+
+            case "L":
+                setPrice({ ...price, packagePrice: pricePackages.sizeL });
+                break;
+
+            case "XL":
+                setPrice({ ...price, packagePrice: pricePackages.sizeXL });
+                break;
+
+            default:
+                setPrice({ ...price, packagePrice: pricePackages.sizeS });
+        }
+    };
 
     useEffect(() => {
+        props.setValue("shippingPrice", price.packagePrice);
         setHeight(props.tabContainerShipping.current.clientHeight);
-    }, []);
+    }, [price]);
 
     return (
         <>
@@ -25,7 +53,11 @@ const StepPackage = (props) => {
                     label="Tamaño máximo: 20 x 10 x 10 cm"
                     label2="Peso máximo: 2 Kg"
                     value="S"
-                    {...props.register("packageSize")}
+                    {...props.register("packageSize", {
+                        onChange: (e) => {
+                            updateShippingPrice(e.target.value);
+                        },
+                    })}
                 />
 
                 <FormInputRadio
@@ -34,7 +66,11 @@ const StepPackage = (props) => {
                     label="Tamaño máximo: 60 x 40 x 10 cm"
                     label2="Peso máximo: 6 Kg"
                     value="M"
-                    {...props.register("packageSize")}
+                    {...props.register("packageSize", {
+                        onChange: (e) => {
+                            updateShippingPrice(e.target.value);
+                        },
+                    })}
                 />
 
                 <FormInputRadio
@@ -43,7 +79,11 @@ const StepPackage = (props) => {
                     label="Tamaño máximo: 60 x 40 x 10 cm"
                     label2="Peso máximo: 8 Kg"
                     value="L"
-                    {...props.register("packageSize")}
+                    {...props.register("packageSize", {
+                        onChange: (e) => {
+                            updateShippingPrice(e.target.value);
+                        },
+                    })}
                 />
 
                 <FormInputRadio
@@ -52,8 +92,14 @@ const StepPackage = (props) => {
                     label="Tamaño máximo: 60 x 40 x 10 cm"
                     label2="Peso máximo: 10 Kg"
                     value="XL"
-                    {...props.register("packageSize")}
+                    {...props.register("packageSize", {
+                        onChange: (e) => {
+                            updateShippingPrice(e.target.value);
+                        },
+                    })}
                 />
+
+                <FormInputHidden {...props.register("shippingPrice")} />
             </div>
 
             <FormTextArea
@@ -110,9 +156,7 @@ const StepPackage = (props) => {
                 obligatorios
             </p>
 
-            <div className="mb-2 mt-8 w-full border-t-2 border-secondary-color pt-2 text-2xl text-secondary-color">
-                Total envío: <span>$10.000</span>
-            </div>
+            <ShippingPrice price={formatPrice(price.packagePrice)} />
         </>
     );
 };

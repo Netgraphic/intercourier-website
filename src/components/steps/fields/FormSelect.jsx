@@ -14,7 +14,7 @@ const FormSelect = forwardRef(
                     name={name}
                     onChange={onChange}
                     ref={ref}
-                    className="w-full rounded border border-main-color bg-white p-2 text-gray-500 focus:outline-secondary-color"
+                    className="w-full rounded border border-main-color bg-white px-2 py-1 text-gray-500 focus:outline-secondary-color"
                 >
                     <option value="">Seleccionar</option>
                     {options.map((option, index) => (

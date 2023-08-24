@@ -77,7 +77,7 @@ const Header = ({ displayTab }) => {
                         </div>
                         <div>
                             <a
-                                href="https://api.whatsapp.com/send?phone=56941347790"
+                                href="whatsapp://send?phone=56941347790"
                                 target="_blank"
                             >
                                 <WhatsappIcon

@@ -24,7 +24,7 @@ const ShippingProcess = () => {
                     <ThirdStepIcon width="400" />
                     Su paquete será entregado en la dirección de destino al
                     siguiente día hábil o el mismo día en caso de seleccionar la
-                    opción de "Entrega express".
+                    opción de "Envío express".
                 </li>
             </ol>
         </section>

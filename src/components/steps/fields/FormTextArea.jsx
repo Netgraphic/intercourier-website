@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 const FormTextArea = forwardRef(
     ({ label, id, placeholder, name, required, onChange, children }, ref) => {
         return (
-            <div className="mb-2 mt-4">
+            <div className="my-2">
                 <label htmlFor={id} className="mb-1 block">
                     {label}
                     {required && (

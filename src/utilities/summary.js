@@ -59,17 +59,21 @@ export const packageSummary = (size, content, expressDelivery) => {
             value: content,
         },
         {
-            name: "Tipo de entrega",
+            name: "Tipo de envío",
             value: !expressDelivery ? "Normal" : "Express",
         },
     ];
 };
 
-export const paymentSummary = (payment) => {
+export const paymentSummary = (payment, price) => {
     return [
         {
             name: "Forma de pago",
             value: payment,
+        },
+        {
+            name: "Total a pagar",
+            value: "$" + price,
         },
     ];
 };

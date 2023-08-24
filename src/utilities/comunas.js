@@ -4,9 +4,8 @@ export const comunasSantiago = (zone) => {
         "Huechuraba",
         "Independencia",
         "Recoleta",
-        "Quilicura",
-        "Renca",
     ];
+
     const comunasNororiente = [
         "La Reina",
         "Las Condes",
@@ -15,31 +14,21 @@ export const comunasSantiago = (zone) => {
         "Providencia",
         "Vitacura",
     ];
-    const comunasNorponiente = [
-        "Cerro Navia",
-        "Lo Prado",
-        "Pudahuel",
-        "Quinta Normal",
-        "Renca",
-        "Estación Central",
-    ];
-    const comunasSur = [
-        "El Bosque",
-        "La Cisterna",
-        "Lo Espejo",
-        "Pedro Aguirre Cerda",
-        "San Joaquín",
-        "San Miguel",
-        "San Ramón",
-        "San Bernardo",
-    ];
+
+    const comunasNorponiente = ["Quinta Normal", "Estación Central"];
+
+    const comunasSur = ["La Cisterna", "San Miguel"];
+
     const comunasSuroriente = [
         "La Florida",
         "Peñalolén",
         "Macul",
         "Puente Alto",
     ];
+
     const comunasSurponiente = ["Maipú", "Estación Central", "Cerrillos"];
+
+    const comunasCentro = ["Santiago"];
 
     switch (zone) {
         case "Norte":
@@ -61,6 +50,6 @@ export const comunasSantiago = (zone) => {
             return comunasSurponiente;
 
         default:
-            return ["Santiago"];
+            return comunasCentro;
     }
 };

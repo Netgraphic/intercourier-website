@@ -2,10 +2,7 @@ import { useContext, useEffect } from "react";
 import { FormWizardContext } from "../../context/FormWizardProvider";
 import { format } from "date-fns";
 
-import SummarySender from "../SummarySender";
-import SummaryRecipient from "../SummaryRecipient";
-import SummaryPayment from "../SummaryPayment";
-import SummaryPackage from "../SummaryPackage";
+import SummaryDetails from "../SummaryDetails";
 
 import {
     senderSummary,
@@ -15,7 +12,7 @@ import {
 } from "../../utilities/summary";
 
 const StepSummary = (props) => {
-    const { setHeight } = useContext(FormWizardContext);
+    const { setHeight, formatPrice } = useContext(FormWizardContext);
 
     const fieldsSender = senderSummary(
         props.getValues("fullnameSender"),
@@ -39,7 +36,10 @@ const StepSummary = (props) => {
         props.getValues("expressDelivery")
     );
 
-    const fieldsPayment = paymentSummary(props.getValues("paymentMethod"));
+    const fieldsPayment = paymentSummary(
+        props.getValues("paymentMethod"),
+        formatPrice(props.getValues("shippingPrice"))
+    );
 
     if (props.getValues("phoneSender")) {
         fieldsSender.push({
@@ -80,24 +80,24 @@ const StepSummary = (props) => {
         <>
             <h3 className="mb-2 text-left text-xl">Resumen del envío:</h3>
 
-            <SummarySender
+            <SummaryDetails
                 title="Información del remitente"
-                fieldsSender={fieldsSender}
+                fields={fieldsSender}
             />
 
-            <SummaryRecipient
+            <SummaryDetails
                 title="Información del destinatario"
-                fieldsRecipient={fieldsRecipient}
+                fields={fieldsRecipient}
             />
 
-            <SummaryPackage
+            <SummaryDetails
                 title="Información del paquete"
-                fieldsPackage={fieldsPackage}
+                fields={fieldsPackage}
             />
 
-            <SummaryPayment
+            <SummaryDetails
                 title="Información del pago"
-                fieldsPayment={fieldsPayment}
+                fields={fieldsPayment}
             />
         </>
     );

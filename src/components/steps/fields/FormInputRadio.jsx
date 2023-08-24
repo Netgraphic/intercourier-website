@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const FormInputRadio = forwardRef(
-    ({ id, icon, label, label2, name, value, onChange }, ref) => {
+    ({ id, icon, label, label2, name, value, onClick, onChange }, ref) => {
         return (
             <div className="w-full">
                 <input
@@ -11,6 +11,7 @@ const FormInputRadio = forwardRef(
                     ref={ref}
                     name={name}
                     value={value}
+                    onClick={onClick}
                     onChange={onChange}
                 />
                 <label
