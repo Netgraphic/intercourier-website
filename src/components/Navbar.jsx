@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-scroll";
+import { FormWizardContext } from "../context/FormWizardProvider";
 
 import InstagramIcon from "./icons/InstagramIcon";
 import WhatsappIcon from "./icons/WhatsappIcon";
 import EmailIcon from "./icons/EmailIcon";
 
-const Navbar = ({ isOpen, setIsOpen, displayTab, props }) => {
+const Navbar = ({ isOpen, setIsOpen, displayTab }) => {
+    const { propsModal } = useContext(FormWizardContext);
+
     const links = [
-        { name: "Seguimiento", path: "tabs" },
+        { name: "Rastrear envío", path: "tabs" },
         { name: "Hacer envío", path: "tabs" },
         { name: "Cotización", path: "tabs" },
         { name: "Proceso de envío", path: "shipping-process" },
@@ -41,7 +45,7 @@ const Navbar = ({ isOpen, setIsOpen, displayTab, props }) => {
             <a
                 className="mb-8 block cursor-pointer md:mb-0 md:ml-5 md:inline-block"
                 onClick={() => {
-                    props.setOpenModal("termsConditions");
+                    propsModal.setOpenModal("termsConditions");
                     setIsOpen(!isOpen);
                 }}
             >
@@ -49,7 +53,7 @@ const Navbar = ({ isOpen, setIsOpen, displayTab, props }) => {
             </a>
 
             <div className="absolute bottom-8 left-[50%] flex translate-x-[-50%] gap-7 text-center text-base md:hidden">
-                <div>
+                <div className="flex items-end">
                     <a
                         href="https://www.instagram.com/intercourierchile/"
                         target="_blank"
@@ -58,15 +62,26 @@ const Navbar = ({ isOpen, setIsOpen, displayTab, props }) => {
                         Instagram
                     </a>
                 </div>
-                <div>
+                <div className="flex items-end">
                     <a href="whatsapp://send?phone=56941347790" target="_blank">
                         <WhatsappIcon stroke="#D15E49" className="m-auto" />
                         Whatsapp
                     </a>
                 </div>
-                <div>
-                    <EmailIcon stroke="#D15E49" className="m-auto" width="42" />
-                    Email
+                <div className="flex items-end">
+                    <a
+                        onClick={() => {
+                            propsModal.setOpenModal("contact");
+                            setIsOpen(!isOpen);
+                        }}
+                    >
+                        <EmailIcon
+                            stroke="#D15E49"
+                            className="m-auto"
+                            width="38"
+                        />
+                        Email
+                    </a>
                 </div>
             </div>
         </nav>

@@ -5,7 +5,7 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Navbar from "./Navbar";
 
-const Header = ({ displayTab, props }) => {
+const Header = ({ displayTab }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -31,7 +31,6 @@ const Header = ({ displayTab, props }) => {
                     isOpen={isOpen}
                     setIsOpen={setIsOpen}
                     displayTab={displayTab}
-                    props={props}
                 />
             </div>
         </header>

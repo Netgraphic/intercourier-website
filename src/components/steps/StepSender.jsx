@@ -39,6 +39,7 @@ const StepSender = (props) => {
             </h3>
 
             <FormInputText
+                id="fullnameSender"
                 label="Nombre completo o Empresa"
                 type="text"
                 placeholder="Ingrese nombre"
@@ -49,6 +50,7 @@ const StepSender = (props) => {
             </FormInputText>
 
             <FormInputText
+                id="addressSender"
                 label="Dirección"
                 type="text"
                 placeholder="Ingrese dirección"
@@ -59,6 +61,7 @@ const StepSender = (props) => {
             </FormInputText>
 
             <FormSelect
+                id="zoneSender"
                 label="Seleccione sector"
                 options={zones}
                 required="true"
@@ -74,6 +77,7 @@ const StepSender = (props) => {
             </FormSelect>
 
             <FormSelect
+                id="comunaSender"
                 label="Seleccione comuna"
                 options={comunas}
                 required="true"
@@ -88,6 +92,7 @@ const StepSender = (props) => {
             </FormSelect>
 
             <FormInputText
+                id="emailSender"
                 label="Email"
                 type="email"
                 placeholder="Ingrese email"
@@ -113,6 +118,7 @@ const StepSender = (props) => {
             </FormInputText>
 
             <FormInputText
+                id="phoneSender"
                 label="Teléfono"
                 type="tel"
                 placeholder="Ingrese teléfono"

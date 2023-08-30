@@ -1,10 +1,14 @@
-import { Button, Modal } from "flowbite-react";
+import { useContext } from "react";
+import { Modal } from "flowbite-react";
+import { FormWizardContext } from "../../context/FormWizardProvider";
 
-const ModalTermsService = ({ props }) => {
+const ModalTermsService = () => {
+    const { propsModal } = useContext(FormWizardContext);
+
     return (
         <Modal
-            show={props.openModal === "termsConditions"}
-            onClose={() => props.setOpenModal(undefined)}
+            show={propsModal.openModal === "termsConditions"}
+            onClose={() => propsModal.setOpenModal(undefined)}
         >
             <Modal.Header>Términos y Condiciones</Modal.Header>
             <Modal.Body>
@@ -233,13 +237,14 @@ const ModalTermsService = ({ props }) => {
                     </p>
                 </div>
             </Modal.Body>
-            <Modal.Footer>
-                <Button
-                    className="rounded-3xl bg-main-color px-4"
-                    onClick={() => props.setOpenModal(undefined)}
+            <Modal.Footer className="justify-center">
+                <button
+                    type="button"
+                    className="rounded-3xl bg-main-color px-6 py-2 text-white transition-all duration-200 ease-in-out hover:bg-secondary-color"
+                    onClick={() => propsModal.setOpenModal(undefined)}
                 >
                     Cerrar
-                </Button>
+                </button>
             </Modal.Footer>
         </Modal>
     );

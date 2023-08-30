@@ -11,17 +11,16 @@ import SantiagoIcon from "./components/icons/SantiagoIcon";
 import Faq from "./sections/Faq";
 
 import { FormWizardContext } from "./context/FormWizardProvider";
-import ModalTermsService from "./components/ModalTermsService";
+import ModalTermsService from "./components/modals/ModalTermsService";
+import ModalContact from "./components/modals/ModalContact";
 
 const App = () => {
     const [tab, setTab] = useState(1);
-    const { setHeight } = useContext(FormWizardContext);
+    const { setHeight, setViewTracking } = useContext(FormWizardContext);
 
+    const tabContainerTracking = useRef(null);
     const tabContainerShipping = useRef(null);
     const tabContainerPricing = useRef(null);
-
-    const [openModal, setOpenModal] = useState(undefined);
-    const props = { openModal, setOpenModal };
 
     const displayTab = (tabIndex) => {
         if (tabIndex <= 3) {
@@ -30,6 +29,7 @@ const App = () => {
             switch (tabIndex) {
                 case 1:
                     setHeight(0);
+                    setViewTracking(false);
                     break;
 
                 case 2:
@@ -48,14 +48,18 @@ const App = () => {
 
     return (
         <>
-            <Header displayTab={displayTab} props={props} />
+            <Header displayTab={displayTab} />
 
             <Banner />
 
             <Tabs
                 displayTab={displayTab}
                 tab={tab}
-                ref={{ tabContainerShipping, tabContainerPricing }}
+                ref={{
+                    tabContainerTracking,
+                    tabContainerShipping,
+                    tabContainerPricing,
+                }}
             />
 
             <div className="relative mx-auto mt-32">
@@ -73,13 +77,11 @@ const App = () => {
 
             <Faq />
 
-            <Footer props={props} />
+            <Footer />
 
-            <ModalTermsService
-                props={props}
-                openModal={openModal}
-                setOpenModal={setOpenModal}
-            />
+            <ModalTermsService />
+
+            <ModalContact />
         </>
     );
 };

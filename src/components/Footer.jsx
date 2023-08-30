@@ -1,11 +1,16 @@
+import { useContext } from "react";
 import { Link } from "react-scroll";
+
+import { FormWizardContext } from "../context/FormWizardProvider";
 
 import EmailIcon from "./icons/EmailIcon";
 import FacebookIcon from "./icons/FacebookIcon";
 import InstagramIcon from "./icons/InstagramIcon";
 import WhatsappIcon from "./icons/WhatsappIcon";
 
-const Footer = ({ props }) => {
+const Footer = () => {
+    const { propsModal } = useContext(FormWizardContext);
+
     return (
         <footer className="mt-28 bg-main-color p-7 text-center text-white">
             <div className="container mx-auto">
@@ -14,9 +19,10 @@ const Footer = ({ props }) => {
                     <a
                         href="https://www.instagram.com/intercourierchile/"
                         target="_blank"
+                        className="grid grid-cols-1 items-end"
                     >
                         <InstagramIcon
-                            width="35"
+                            width="36"
                             stroke="#fff"
                             className="m-auto"
                         />
@@ -25,30 +31,38 @@ const Footer = ({ props }) => {
                     <a
                         href="https://api.whatsapp.com/send?phone=56941347790"
                         target="_blank"
+                        className="grid grid-cols-1 items-end"
                     >
                         <FacebookIcon
-                            width="32"
+                            width="35"
                             stroke="#fff"
                             className="m-auto"
                         />
                         Facebook
                     </a>
-                    <a href="whatsapp://send?phone=56941347790" target="_blank">
+                    <a
+                        href="whatsapp://send?phone=56941347790"
+                        target="_blank"
+                        className="grid grid-cols-1 items-end"
+                    >
                         <WhatsappIcon
-                            width="36"
+                            width="37"
                             stroke="#fff"
                             className="m-auto"
                         />
                         Whatsapp
                     </a>
-                    <div>
+                    <a
+                        onClick={() => propsModal.setOpenModal("contact")}
+                        className="grid grid-cols-1 items-end"
+                    >
                         <EmailIcon
-                            width="36"
+                            width="33"
                             stroke="#fff"
                             className="m-auto"
                         />
                         Email
-                    </div>
+                    </a>
                 </div>
                 <div className="mt-6 flex items-center justify-center gap-4 leading-none">
                     <Link smooth spy offset={-90} to="shipping-process">
@@ -65,7 +79,7 @@ const Footer = ({ props }) => {
                 </div>
                 <a
                     className="mt-5 block cursor-pointer text-lg"
-                    onClick={() => props.setOpenModal("termsConditions")}
+                    onClick={() => propsModal.setOpenModal("termsConditions")}
                 >
                     Términos y Condiciones
                 </a>

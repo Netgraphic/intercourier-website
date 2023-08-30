@@ -1,6 +1,7 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormWizard from "react-form-wizard-component";
+import { FormWizardContext } from "../context/FormWizardProvider";
 import "react-form-wizard-component/dist/style.css";
 
 import StepOrder from "./steps/StepOrder";
@@ -9,13 +10,20 @@ import StepRecipient from "./steps/StepRecipient";
 import StepPackage from "./steps/StepPackage";
 import StepPayment from "./steps/StepPayment";
 import StepSummary from "./steps/StepSummary";
+import ModalConfirmShipping from "./modals/ModalConfirmShipping";
 
 import { comunasSantiago } from "../utilities/comunas";
 import { pricePackages } from "../utilities/pricePackages";
+import { sendEmail } from "../utilities/submitShipping";
+import { sistrack } from "../utilities/sistrack";
 import { format } from "date-fns";
+import FormInputHidden from "./steps/fields/FormInputHidden";
 
 const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
     const date = new Date();
+    const { url, headers, create, createTrackingCode } = sistrack();
+    const { agreeTerms, formatPrice, setLoading, propsModal } =
+        useContext(FormWizardContext);
 
     const {
         register,
@@ -26,6 +34,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         clearErrors,
         setValue,
         getValues,
+        reset,
     } = useForm({
         defaultValues: {
             orderType: "Web",
@@ -61,6 +70,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         comunaRecipient,
         emailRecipient,
         packageContents,
+        packageValue,
         expressDelivery,
         customDeliveryTime,
     ] = watch([
@@ -75,6 +85,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         "comunaRecipient",
         "emailRecipient",
         "packageContents",
+        "packageValue",
         "expressDelivery",
         "customDeliveryTime",
     ]);
@@ -244,7 +255,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
     };
 
     const checkValidateTabPackage = () => {
-        if (packageContents === "") {
+        if (packageContents === "" || packageValue === "") {
             return false;
         }
 
@@ -258,12 +269,85 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                 message: "Campo obligatorio",
             });
         }
+
+        if (packageValue === "") {
+            setError("packageValue", {
+                type: "custom",
+                message: "Campo obligatorio",
+            });
+        }
     };
 
-    const onSubmit = (data) => {
-        //Save the date in the right format
+    const onSubmit = async (data) => {
+        //Update some values in different formats for submission
         let date = format(getValues("deliveryDate"), "dd/MM/yyyy");
         data.deliveryDate = date;
+
+        let deliveryType = !getValues("expressDelivery") ? "Normal" : "Express";
+        data.expressDelivery = deliveryType;
+
+        let price = formatPrice(getValues("shippingPrice"));
+        data.shippingPrice = price;
+
+        let declaredValue = formatPrice(getValues("packageValue"));
+        data.packageValue = declaredValue;
+
+        let customDelivery = !customDeliveryTime
+            ? "No"
+            : getValues("deliveryDate");
+        data.deliveryDate = customDelivery;
+
+        propsModal.setOpenModal("confirmShipping");
+
+        let body = {
+            sender: {
+                name: data.fullnameSender,
+                telephone: data.phoneSender,
+                email: data.emailSender,
+                address_line_1: data.addressSender,
+                suburb: data.comunaSender,
+                state: data.zoneSender,
+            },
+            recipient: {
+                name: data.fullnameRecipient,
+                telephone: data.phoneRecipient,
+                email: data.emailRecipient,
+                address_line_1: data.addressRecipient,
+                city: "Santiago",
+                suburb: data.comunaRecipient,
+                state: data.zoneRecipient,
+                country: "Chile",
+            },
+            order: {
+                sender_id: null,
+                recipient_id: null,
+                order_id: createTrackingCode(),
+                description: data.packageContents,
+                sender_phone: data.phoneSender,
+                recipient_phone: data.phoneRecipient,
+                weight: 5,
+                price_per_weight: getValues("shippingPrice"),
+                declared_value: getValues("packageValue"),
+                observations: data.observations,
+            },
+        };
+
+        data.trackingCode = body.order.order_id;
+
+        setLoading(true);
+        let senderID = await create(url.createSender, headers, body.sender);
+        let recipientID = await create(
+            url.createRecipient,
+            headers,
+            body.recipient
+        );
+
+        body.order.sender_id = senderID;
+        body.order.recipient_id = recipientID;
+
+        await create(url.createOrder, headers, body.order);
+        //await sendEmail(data, getValues("paymentMethod"));
+        setLoading(false);
         console.log(data);
     };
 
@@ -306,11 +390,20 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         );
     };
 
+    const handleComplete = () => {
+        propsModal.setOpenModal("confirmShipping");
+    };
+
     const finishTemplate = () => {
         return (
             <button
-                type="submit"
-                className="rounded-3xl border-2 border-main-color bg-main-color px-8 py-2 text-white"
+                type="button"
+                disabled={!agreeTerms ? true : false}
+                onClick={handleComplete}
+                className={`rounded-3xl border-2 border-main-color bg-main-color px-8 py-2 text-white ${
+                    !agreeTerms &&
+                    "disabled:cursor-not-allowed disabled:opacity-50"
+                }`}
             >
                 Finalizar
             </button>
@@ -327,7 +420,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                 ref={tabContainerShipping}
                 className="container relative -top-8 mx-auto rounded-xl bg-white px-5"
             >
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form>
                     <FormWizard
                         ref={formWizardRef}
                         stepSize="xs"
@@ -408,6 +501,16 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                             />
                         </FormWizard.TabContent>
                     </FormWizard>
+
+                    <ModalConfirmShipping
+                        handleSubmit={handleSubmit(onSubmit)}
+                        getValues={getValues}
+                        tabContainerShipping={tabContainerShipping}
+                        formWizardRef={formWizardRef}
+                        reset={reset}
+                    />
+
+                    <FormInputHidden {...register("trackingCode")} />
                 </form>
             </div>
         </div>

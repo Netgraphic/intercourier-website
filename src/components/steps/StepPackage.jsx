@@ -9,6 +9,7 @@ import FormDatepicker from "./fields/FormDatepicker";
 import FormToggle from "./fields/FormToggle";
 import ShippingPrice from "../ShippingPrice";
 import FormInputHidden from "./fields/FormInputHidden";
+import FormInputText from "./fields/FormInputText";
 
 const StepPackage = (props) => {
     const { setHeight, price, setPrice, formatPrice } =
@@ -103,8 +104,8 @@ const StepPackage = (props) => {
             </div>
 
             <FormTextArea
+                id="packageContents"
                 label="Declaración de contenido"
-                id="package-contents"
                 placeholder="Ingrese contenidos del paquete..."
                 required="true"
                 {...props.register("packageContents")}
@@ -112,7 +113,18 @@ const StepPackage = (props) => {
                 <FormError error={props.errors.packageContents} />
             </FormTextArea>
 
-            <p className="mb-2 leading-tight">
+            <FormInputText
+                id="packageValue"
+                label="Valor declarado"
+                type="number"
+                placeholder="Ingrese valor del contenido"
+                required="true"
+                {...props.register("packageValue")}
+            >
+                <FormError error={props.errors.packageValue} />
+            </FormInputText>
+
+            <p className="mb-2 mt-4 leading-tight">
                 Por defecto, los envíos se realizan al siguiente día hábil. Si
                 necesita que su envío se realice el mismo día, active la opción{" "}
                 <span className="text-secondary-color">Envío express.</span>

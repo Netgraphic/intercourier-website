@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { Checkbox, Label } from "flowbite-react";
 import { FormWizardContext } from "../../context/FormWizardProvider";
 import { format } from "date-fns";
 
@@ -12,7 +13,8 @@ import {
 } from "../../utilities/summary";
 
 const StepSummary = (props) => {
-    const { setHeight, formatPrice } = useContext(FormWizardContext);
+    const { setHeight, formatPrice, agreeTerms, setAgreeTerms, propsModal } =
+        useContext(FormWizardContext);
 
     const fieldsSender = senderSummary(
         props.getValues("fullnameSender"),
@@ -118,6 +120,26 @@ const StepSummary = (props) => {
                     </ul>
                 </>
             )}
+
+            <div className="mt-4 flex items-center gap-2">
+                <Checkbox
+                    id="agree"
+                    className="checked:bg-main-color focus:ring-main-color"
+                    checked={agreeTerms}
+                    onChange={() => setAgreeTerms(!agreeTerms)}
+                />
+                <Label className="flex" htmlFor="agree">
+                    He leído y acepto los
+                    <a
+                        className="ml-1 cursor-pointer text-secondary-color hover:underline"
+                        onClick={() =>
+                            propsModal.setOpenModal("termsConditions")
+                        }
+                    >
+                        Términos y Condiciones
+                    </a>
+                </Label>
+            </div>
         </>
     );
 };

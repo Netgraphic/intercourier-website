@@ -7,7 +7,10 @@ import TabPricing from "./TabPricing";
 import { FormWizardContext } from "../context/FormWizardProvider";
 
 const Tabs = forwardRef(
-    ({ displayTab, tab }, { tabContainerShipping, tabContainerPricing }) => {
+    (
+        { displayTab, tab },
+        { tabContainerTracking, tabContainerShipping, tabContainerPricing }
+    ) => {
         const { height } = useContext(FormWizardContext);
 
         return (
@@ -17,7 +20,7 @@ const Tabs = forwardRef(
                         className={`cursor-pointer ${tab === 1 && "activeTab"}`}
                         onClick={() => displayTab(1)}
                     >
-                        Seguimiento
+                        Rastrear envío
                     </a>
                     <a
                         className={`cursor-pointer ${tab === 2 && "activeTab"}`}
@@ -37,7 +40,7 @@ const Tabs = forwardRef(
                     className="container relative mx-auto"
                     style={{ height: height + "px" }}
                 >
-                    <TabTracking tab={tab} />
+                    <TabTracking tab={tab} ref={tabContainerTracking} />
                     <TabShipping tab={tab} ref={tabContainerShipping} />
                     <TabPricing tab={tab} ref={tabContainerPricing} />
                 </div>

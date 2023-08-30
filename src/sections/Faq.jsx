@@ -40,31 +40,43 @@ const Faq = () => {
 
             <Accordion transition transitionTimeout={200}>
                 <AccordionItem header="¿Puedo cambiar la dirección de entrega de mi paquete?">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse sit amet nibh id justo placerat faucibus. Etiam
-                    malesuada, urna non auctor luctus, tortor tellus molestie
-                    justo, vitae vulputate elit tortor in dui.
+                    <p className="leading-tight">
+                        Es posible cambiar la dirección de entrega
+                        contactándonos mediante email, Instagram o Whatsapp, e
+                        indicando los datos de su envío.
+                    </p>
                 </AccordionItem>
 
-                <AccordionItem header="¿Cómo puedo hacer seguimiento a mi envío?">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse sit amet nibh id justo placerat faucibus. Etiam
-                    malesuada, urna non auctor luctus, tortor tellus molestie
-                    justo, vitae vulputate elit tortor in dui.
+                <AccordionItem header="¿Cómo puedo rastrear mi envío?">
+                    <p className="mb-1.5 leading-tight">
+                        Una vez recibida la orden de envío, recibirá un email
+                        que incluirá su código de seguimiento. Éste código lo
+                        puede ingresar directamente en el buscador de nuestro
+                        sitio web, dentro de la sección de "Rastrear envío" y
+                        será derivado a una vista con los detalles.
+                    </p>
+                    <p className="leading-tight">
+                        También puede rastrear su envío a través de nuestra
+                        plataforma externa, en los emails que le llegarán con
+                        cada actualizacion .
+                    </p>
                 </AccordionItem>
 
                 <AccordionItem header="¿Cuál es el peso máximo permitido por paquete?">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse sit amet nibh id justo placerat faucibus. Etiam
-                    malesuada, urna non auctor luctus, tortor tellus molestie
-                    justo, vitae vulputate elit tortor in dui.
+                    <p className="leading-tight">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Suspendisse sit amet nibh id justo placerat faucibus.
+                        Etiam malesuada, urna non auctor luctus, tortor tellus
+                        molestie justo, vitae vulputate elit tortor in dui.
+                    </p>
                 </AccordionItem>
 
                 <AccordionItem header="¿Puedo reprogramar una entrega?">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Suspendisse sit amet nibh id justo placerat faucibus. Etiam
-                    malesuada, urna non auctor luctus, tortor tellus molestie
-                    justo, vitae vulputate elit tortor in dui.
+                    <p className="leading-tight">
+                        En el caso de que necesite reprogramar su entrega, puede
+                        hacerlo contactándonos mediante email, Instagram o
+                        Whatsapp.
+                    </p>
                 </AccordionItem>
             </Accordion>
         </section>

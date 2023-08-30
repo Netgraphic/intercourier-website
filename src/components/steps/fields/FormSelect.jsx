@@ -1,16 +1,17 @@
 import { forwardRef } from "react";
 
 const FormSelect = forwardRef(
-    ({ label, name, onChange, options, required, children }, ref) => {
+    ({ id, label, name, onChange, options, required, children }, ref) => {
         return (
             <div className="mb-2">
-                <label className="mb-1 block">
+                <label className="mb-1 block" htmlFor={id}>
                     {label}
                     {required && (
                         <span className="ml-1 text-secondary-color">*</span>
                     )}
                 </label>
                 <select
+                    id={id}
                     name={name}
                     onChange={onChange}
                     ref={ref}

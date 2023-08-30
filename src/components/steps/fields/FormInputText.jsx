@@ -1,10 +1,13 @@
 import { forwardRef } from "react";
 
 const FormInputText = forwardRef(
-    ({ label, type, placeholder, name, onChange, required, children }, ref) => {
+    (
+        { id, label, type, placeholder, name, onChange, required, children },
+        ref
+    ) => {
         return (
             <div className="mb-2">
-                <label className="mb-1 block">
+                <label className="mb-1 block" htmlFor={id}>
                     {label}
                     {required && (
                         <span className="ml-1 text-secondary-color">*</span>
@@ -13,6 +16,7 @@ const FormInputText = forwardRef(
                 <input
                     type={type}
                     placeholder={placeholder}
+                    id={id}
                     name={name}
                     onChange={onChange}
                     ref={ref}
