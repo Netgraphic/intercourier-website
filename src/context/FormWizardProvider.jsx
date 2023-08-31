@@ -4,6 +4,7 @@ export const FormWizardContext = createContext();
 
 const FormWizardProvider = ({ children }) => {
     const [height, setHeight] = useState(0);
+    const [bannerHeight, setBannerHeight] = useState(0);
     const [openModal, setOpenModal] = useState(undefined);
     const [agreeTerms, setAgreeTerms] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -28,6 +29,8 @@ const FormWizardProvider = ({ children }) => {
             value={{
                 height,
                 setHeight,
+                bannerHeight,
+                setBannerHeight,
                 price,
                 setPrice,
                 formatPrice,

@@ -62,10 +62,12 @@ const App = () => {
                 }}
             />
 
-            <div className="relative mx-auto mt-32">
-                <div className="santiago-map container px-5 text-4xl leading-none text-title-color">
-                    Envíos a gran parte de Santiago
-                    <figure className="absolute -top-12 right-5 z-[-1] w-2/4">
+            <div className="relative mx-auto mt-32 md:mt-0">
+                <div className="santiago-map container mx-auto px-5 text-4xl leading-none text-title-color md:w-3/5">
+                    <h2 className="md:relative md:top-52 md:w-1/2 md:text-6xl">
+                        Envíos a gran parte de Santiago
+                    </h2>
+                    <figure className="absolute -top-12 right-5 z-[-1] w-2/4 md:relative md:-top-20 md:float-right md:w-1/2">
                         <SantiagoIcon />
                     </figure>
                 </div>
@@ -77,7 +79,7 @@ const App = () => {
 
             <Faq />
 
-            <Footer />
+            <Footer displayTab={displayTab} />
 
             <ModalTermsService />
 

@@ -47,7 +47,7 @@ const StepPackage = (props) => {
         <>
             <h3 className="mb-4 text-left text-xl">Información del paquete:</h3>
 
-            <div className="mb-4 grid grid-cols-2 gap-4">
+            <div className="mb-4 grid grid-cols-2 gap-4 md:grid-cols-4">
                 <FormInputRadio
                     id="size-s"
                     icon="S"
@@ -143,17 +143,21 @@ const StepPackage = (props) => {
             )}
 
             {!props.expressDelivery && (
-                <FormToggle
-                    label="Envío programado"
-                    {...props.register("customDeliveryTime")}
-                />
+                <div>
+                    <FormToggle
+                        label="Envío programado"
+                        {...props.register("customDeliveryTime")}
+                    />
+                </div>
             )}
 
             {props.customDeliveryTime && (
-                <FormDatepicker
-                    setValues={props.setValue}
-                    {...props.register("deliveryDate")}
-                />
+                <div>
+                    <FormDatepicker
+                        setValues={props.setValue}
+                        {...props.register("deliveryDate")}
+                    />
+                </div>
             )}
 
             <FormTextArea

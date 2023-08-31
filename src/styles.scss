@@ -17,9 +17,24 @@ header {
     max-height: 72px;
 }
 
+nav a {
+    border-bottom: 3px solid transparent;
+    padding-bottom: 5px;
+    transition: all 0.3s ease-in-out;
+
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+        border-bottom: 3px solid transparent !important;
+    }
+
+    &.active {
+        border-bottom: 3px solid #fff;
+    }
+}
+
 .activeTab {
     border-bottom: 2px solid #fff;
-    padding-bottom: 5px;
 }
 
 ol {
@@ -119,11 +134,14 @@ ol {
 .santiago-map {
     &::before {
         content: "";
-        width: 0px;
-        height: 0px;
-        border-style: solid;
-        border-width: 21px 0 0px 300px;
-        border-color: transparent transparent transparent $mainColor;
+        background-image: linear-gradient(
+            to right top,
+            $mainColor 0%,
+            $mainColor 50%,
+            transparent 50%
+        );
+        width: 85%;
+        height: 20px;
         position: absolute;
         left: 0;
         top: -35px;
@@ -133,11 +151,14 @@ ol {
 
     &::after {
         content: "";
-        width: 0px;
-        height: 0px;
-        border-style: solid;
-        border-width: 0 350px 21px 0;
-        border-color: transparent $mainColor transparent transparent;
+        background-image: linear-gradient(
+            to left bottom,
+            $mainColor 0%,
+            $mainColor 50%,
+            transparent 50%
+        );
+        width: 95%;
+        height: 20px;
         position: absolute;
         right: 0;
         bottom: -40px;
@@ -274,3 +295,5 @@ address {
     margin-top: 20px;
     color: $titleColor;
 }
+
+@import "media-queries";

@@ -28,6 +28,13 @@ const Confirmation = (props) => {
             <Modal.Footer className="justify-center">
                 <button
                     type="button"
+                    className="mr-2 w-32 rounded-3xl border-2 border-main-color px-8 py-4 leading-none text-main-color"
+                    onClick={() => propsModal.setOpenModal(undefined)}
+                >
+                    Cancelar
+                </button>
+                <button
+                    type="button"
                     className="w-32 rounded-3xl border-2 border-main-color bg-main-color px-6 py-3 text-center leading-none text-white transition-all duration-200 ease-in-out hover:border-secondary-color hover:bg-secondary-color"
                     onClick={() => props.setConfirmSubmit(true)}
                 >
@@ -36,13 +43,6 @@ const Confirmation = (props) => {
                     ) : (
                         <span className="block py-1">Confirmar</span>
                     )}
-                </button>
-                <button
-                    type="button"
-                    className="mr-4 w-32 rounded-3xl border-2 border-main-color px-8 py-4 leading-none text-main-color"
-                    onClick={() => propsModal.setOpenModal(undefined)}
-                >
-                    Cancelar
                 </button>
             </Modal.Footer>
         </>

@@ -17,8 +17,10 @@ export default {
                 "palanquin-dark": ["Palanquin Dark", "sans-serif"],
             },
             backgroundImage: {
-                "desktop-hero": "url('./assets/images/desktop-hero.jpg')",
-                "mobile-hero": "url('./assets/images/mobile-hero.jpg')",
+                "desktop-hero":
+                    "linear-gradient(0deg, rgba(209, 94, 73, .3), rgba(209, 94, 73, .3)), url('./assets/images/desktop-hero.jpg')",
+                "mobile-hero":
+                    "linear-gradient(0deg, rgba(209, 94, 73, .3), rgba(209, 94, 73, .3)), url('./assets/images/mobile-hero.jpg')",
             },
         },
     },

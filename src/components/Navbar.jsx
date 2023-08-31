@@ -36,14 +36,14 @@ const Navbar = ({ isOpen, setIsOpen, displayTab }) => {
                         displayTab(index + 1);
                         setIsOpen(!isOpen);
                     }}
-                    className="mb-8 block cursor-pointer md:mb-0 md:ml-5 md:inline-block"
+                    className="mb-8 block cursor-pointer md:mb-0 md:ml-4 md:inline-block"
                 >
                     {link.name}
                 </Link>
             ))}
 
             <a
-                className="mb-8 block cursor-pointer md:mb-0 md:ml-5 md:inline-block"
+                className="mb-8 block cursor-pointer md:mb-0 md:ml-4 md:hidden"
                 onClick={() => {
                     propsModal.setOpenModal("termsConditions");
                     setIsOpen(!isOpen);

@@ -10,7 +10,7 @@ const Faq = () => {
                 <>
                     {header}
                     <FontAwesomeIcon
-                        className={`ml-5 transition-transform duration-200 ease-in-out ${
+                        className={`ml-auto transition-transform duration-200 ease-in-out ${
                             isEnter && "rotate-180"
                         }`}
                         icon={isEnter ? faMinus : faPlus}
@@ -20,11 +20,11 @@ const Faq = () => {
             className="mb-3 rounded-xl bg-white"
             buttonProps={{
                 className:
-                    "flex items-center w-full text-left text-base px-5 py-3 leading-tight",
+                    "flex items-center w-full text-left text-base px-5 py-3 leading-tight md:p-6 md:text-xl",
             }}
             contentProps={{
                 className:
-                    "transition-height duration-200 ease-out px-5 text-gray-500 leading-tight",
+                    "transition-height duration-200 ease-out px-5 text-gray-500 leading-tight md:text-lg md:px-6",
             }}
             panelProps={{
                 className: "pb-5",
@@ -33,8 +33,8 @@ const Faq = () => {
     );
 
     return (
-        <section id="faq" className="container mx-auto mt-16 px-10">
-            <h2 className="mb-5 text-2xl text-title-color">
+        <section id="faq" className="container mx-auto mt-16 px-10 md:w-3/5">
+            <h2 className="mb-5 text-2xl text-title-color md:text-4xl">
                 Preguntas Frecuentes
             </h2>
 

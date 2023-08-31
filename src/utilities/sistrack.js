@@ -32,6 +32,9 @@ export const sistrack = () => {
 
             if (order.data === undefined) {
                 setError(true);
+                setTimeout(() => {
+                    setError(false);
+                }, 3000);
             } else {
                 setError(false);
             }

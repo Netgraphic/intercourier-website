@@ -16,7 +16,7 @@ const FormInputRadio = forwardRef(
                 />
                 <label
                     htmlFor={id}
-                    className="flex w-full cursor-pointer items-center justify-center rounded-xl border-2 border-secondary-color px-3 py-5 text-lg text-secondary-color peer-checked:bg-main-color peer-checked:text-white peer-checked:[&>div>span>svg]:stroke-white"
+                    className="flex h-full w-full cursor-pointer items-end justify-center rounded-xl border-2 border-secondary-color px-3 py-5 text-lg text-secondary-color peer-checked:bg-main-color peer-checked:text-white peer-checked:[&>div>span>svg]:stroke-white"
                 >
                     <div className="text-center">
                         <span className="text-7xl">{icon}</span>

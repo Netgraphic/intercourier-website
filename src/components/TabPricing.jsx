@@ -32,7 +32,7 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                     Seleccione el tamaño de su paquete
                 </p>
 
-                <div className="mb-4 grid grid-cols-2 gap-4">
+                <div className="mb-4 grid grid-cols-2 gap-4 md:grid-cols-4">
                     <div className="w-full">
                         <input
                             id="package-s"

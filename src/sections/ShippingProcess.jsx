@@ -6,21 +6,23 @@ const ShippingProcess = () => {
     return (
         <section
             id="shipping-process"
-            className="container mx-auto mt-28 px-10"
+            className="container mx-auto mt-28 px-10 md:mt-[450px] md:w-3/5"
         >
-            <h2 className="mb-5 text-2xl text-title-color">Proceso de envío</h2>
+            <h2 className="mb-5 text-2xl text-title-color md:text-4xl">
+                Proceso de envío
+            </h2>
             <ol>
-                <li>
+                <li className="md:text-2xl">
                     <FirstStepIcon width="200" />
                     Complete el formulario de envío en el sitio web o haciendo
                     su pedido a través de Whatsapp o Instagram.
                 </li>
-                <li>
+                <li className="md:text-2xl">
                     Recogeremos su paquete directamente en su domicilio o
                     negocio.
                     <SecondStepIcon width="150" />
                 </li>
-                <li>
+                <li className="md:text-2xl">
                     <ThirdStepIcon width="400" />
                     Su paquete será entregado en la dirección de destino al
                     siguiente día hábil o el mismo día en caso de seleccionar la

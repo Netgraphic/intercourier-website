@@ -34,7 +34,7 @@ const StepPayment = (props) => {
         <>
             <h3 className="mb-4 text-left text-xl">Forma de pago:</h3>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <FormInputRadio
                     id="online-payment"
                     icon={iconWeb}

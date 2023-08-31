@@ -24,10 +24,10 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
     } = useForm();
 
     useEffect(() => {
-        if (viewTracking) {
+        if (viewTracking && orderDetails !== undefined) {
             setHeight(tabContainerTracking.current.clientHeight - 60);
         }
-    }, [viewTracking]);
+    }, [viewTracking, orderDetails]);
 
     const checkStatus = (array, status) => {
         let active = array.find((element) => element.shipping_status == status);
@@ -61,11 +61,11 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
             >
                 {!viewTracking || orderDetails === undefined ? (
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <div className="relative -top-8 flex w-full justify-between rounded-xl border-4 border-main-color bg-white p-2 text-gray-500">
+                        <div className="relative -top-8 mx-auto flex w-full justify-between rounded-xl border-4 border-main-color bg-white p-2 text-gray-500 md:w-2/5">
                             <input
                                 type="text"
                                 placeholder="Ingrese código de seguimiento..."
-                                className="w-4/5 border-none px-3 uppercase outline-none placeholder:normal-case focus:ring-transparent"
+                                className="w-4/5 border-none px-3 uppercase outline-none placeholder:normal-case focus:ring-transparent md:text-lg"
                                 {...register("trackingCode", {
                                     required: {
                                         value: true,
@@ -83,21 +83,21 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
                                     <SearchIcon />
                                 )}
                             </button>
+                            {errors.trackingCode && (
+                                <div className="absolute left-0 top-[68px]">
+                                    <p className="rounded-lg bg-secondary-color px-3 py-1 text-sm text-white">
+                                        {errors.trackingCode.message}
+                                    </p>
+                                </div>
+                            )}
+                            {error && (
+                                <div className="absolute left-0 top-[68px]">
+                                    <p className="rounded-lg bg-secondary-color px-3 py-1 text-sm text-white">
+                                        El código ingresado no existe
+                                    </p>
+                                </div>
+                            )}
                         </div>
-                        {errors.trackingCode && (
-                            <div className="absolute top-10">
-                                <p className="rounded-lg bg-secondary-color px-3 py-1 text-sm text-white">
-                                    {errors.trackingCode.message}
-                                </p>
-                            </div>
-                        )}
-                        {error && (
-                            <div className="absolute top-10">
-                                <p className="rounded-lg bg-secondary-color px-3 py-1 text-sm text-white">
-                                    El código ingresado no existe
-                                </p>
-                            </div>
-                        )}
                     </form>
                 ) : (
                     <div
@@ -177,7 +177,7 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
                                     (detail, index) => (
                                         <li
                                             key={index}
-                                            className="flex justify-between"
+                                            className="flex items-center justify-between"
                                         >
                                             <div className="w-3/5">
                                                 <time className="block">

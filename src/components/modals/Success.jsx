@@ -59,15 +59,9 @@ const Success = (props) => {
                 </div>
             </Modal.Body>
             <Modal.Footer className="justify-center">
-                <a
-                    href="./"
-                    className="cursor-pointer rounded-3xl border-2 border-main-color bg-main-color px-6 py-2 text-center leading-none text-white transition-all duration-200 ease-in-out hover:bg-secondary-color"
-                >
-                    Volver al inicio
-                </a>
                 <button
                     type="button"
-                    className="mr-4 rounded-3xl border-2 border-main-color px-8 py-2 leading-none text-main-color"
+                    className="mr-2 rounded-3xl border-2 border-main-color px-8 py-2 leading-none text-main-color"
                     onClick={() => {
                         propsModal.setOpenModal(undefined);
                         setAgreeTerms(false);
@@ -83,6 +77,12 @@ const Success = (props) => {
                 >
                     Hacer otro envío
                 </button>
+                <a
+                    href="./"
+                    className="cursor-pointer rounded-3xl border-2 border-main-color bg-main-color px-6 py-2 text-center leading-none text-white transition-all duration-200 ease-in-out hover:bg-secondary-color"
+                >
+                    Volver al inicio
+                </a>
             </Modal.Footer>
         </>
     );

@@ -15,21 +15,27 @@ const Tabs = forwardRef(
 
         return (
             <section id="tabs" className="bg-main-color">
-                <div className="container mx-auto flex justify-center gap-5 pb-12 pt-5 text-white">
+                <div className="container mx-auto flex justify-center gap-5 pb-12 pt-5 text-white md:gap-7">
                     <a
-                        className={`cursor-pointer ${tab === 1 && "activeTab"}`}
+                        className={`cursor-pointer md:text-lg ${
+                            tab === 1 && "activeTab"
+                        }`}
                         onClick={() => displayTab(1)}
                     >
                         Rastrear envío
                     </a>
                     <a
-                        className={`cursor-pointer ${tab === 2 && "activeTab"}`}
+                        className={`cursor-pointer md:text-lg ${
+                            tab === 2 && "activeTab"
+                        }`}
                         onClick={() => displayTab(2)}
                     >
                         Hacer envío
                     </a>
                     <a
-                        className={`cursor-pointer ${tab === 3 && "activeTab"}`}
+                        className={`cursor-pointer md:text-lg ${
+                            tab === 3 && "activeTab"
+                        }`}
                         onClick={() => displayTab(3)}
                     >
                         Cotización
@@ -37,7 +43,7 @@ const Tabs = forwardRef(
                 </div>
 
                 <div
-                    className="container relative mx-auto"
+                    className="container relative mx-auto md:w-3/4"
                     style={{ height: height + "px" }}
                 >
                     <TabTracking tab={tab} ref={tabContainerTracking} />

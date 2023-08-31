@@ -37,7 +37,7 @@ const StepOrder = (props) => {
         <>
             <h3 className="mb-4 text-left text-xl">Tipo de orden:</h3>
 
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <FormInputRadio
                     id="order-web"
                     icon={iconWeb}

@@ -21,8 +21,9 @@ import FormInputHidden from "./steps/fields/FormInputHidden";
 
 const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
     const date = new Date();
+    const [orderValue, setOrderValue] = useState("Web");
     const { url, headers, create, createTrackingCode } = sistrack();
-    const { agreeTerms, formatPrice, setLoading, propsModal } =
+    const { bannerHeight, agreeTerms, formatPrice, setLoading, propsModal } =
         useContext(FormWizardContext);
 
     const {
@@ -89,8 +90,6 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         "expressDelivery",
         "customDeliveryTime",
     ]);
-
-    const [orderValue, setOrderValue] = useState("Web");
 
     useEffect(() => {
         if (localStorage.getItem("deliveryDate") !== null) {
@@ -353,7 +352,8 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
 
     const backTemplate = () => {
         const handlePrevious = () => {
-            let scrollDiv = tabContainerShipping.current.offsetTop + 250;
+            let scrollDiv =
+                tabContainerShipping.current.offsetTop + bannerHeight + 20;
             window.scrollTo({ top: scrollDiv, behavior: "smooth" });
             clearErrors();
             formWizardRef.current?.prevTab();
@@ -371,7 +371,8 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
 
     const nextTemplate = () => {
         const handleNext = () => {
-            let scrollDiv = tabContainerShipping.current.offsetTop + 250;
+            let scrollDiv =
+                tabContainerShipping.current.offsetTop + bannerHeight + 20;
             window.scrollTo({ top: scrollDiv, behavior: "smooth" });
             clearErrors();
             formWizardRef.current?.nextTab();
@@ -420,7 +421,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                 ref={tabContainerShipping}
                 className="container relative -top-8 mx-auto rounded-xl bg-white px-5"
             >
-                <form>
+                <form className="container mx-auto md:w-3/4">
                     <FormWizard
                         ref={formWizardRef}
                         stepSize="xs"
