@@ -37,6 +37,18 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
         return true;
     };
 
+    const checkNotDelivered = (array) => {
+        let notDelivered = array.find(
+            (element) => element.shipping_status == "No Entregado"
+        );
+
+        if (notDelivered === undefined || notDelivered !== array[0]) {
+            return false;
+        }
+
+        return true;
+    };
+
     const onSubmit = async (data) => {
         const { trackingCode } = data;
         setLoading(true);
@@ -55,7 +67,7 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
     return (
         <>
             <div
-                className={`absolute top-0 w-full px-5 transition-all duration-200 ease-in-out ${
+                className={`absolute top-0 w-full px-5 transition-all duration-200 ease-in-out md:z-10 ${
                     tab === 1 ? "visible opacity-100" : "invisible opacity-0"
                 }`}
             >
@@ -131,9 +143,11 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
 
                             <div className="container">
                                 <ul className="timeline">
-                                    <li className="active-tl">Por Enviar</li>
+                                    <li className="to-send-tl active-tl">
+                                        Por Enviar
+                                    </li>
                                     <li
-                                        className={`${
+                                        className={`in-transit-tl ${
                                             checkStatus(
                                                 orderDetails.steps_records,
                                                 "En Tránsito"
@@ -142,14 +156,15 @@ const TabTracking = forwardRef(({ tab }, tabContainerTracking) => {
                                     >
                                         En Tránsito
                                     </li>
-                                    {orderDetails.steps_records[0]
-                                        .shipping_status === "Entregado" ? (
+                                    {!checkNotDelivered(
+                                        orderDetails.steps_records
+                                    ) ? (
                                         <li
-                                            className={`${
+                                            className={`delivered-tl ${
                                                 checkStatus(
                                                     orderDetails.steps_records,
                                                     "Entregado"
-                                                ) && "delivered-tl"
+                                                ) && "active-tl"
                                             }`}
                                         >
                                             Entregado

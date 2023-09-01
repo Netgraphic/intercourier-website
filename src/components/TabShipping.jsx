@@ -304,8 +304,10 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                 telephone: data.phoneSender,
                 email: data.emailSender,
                 address_line_1: data.addressSender,
+                city: "Santiago",
                 suburb: data.comunaSender,
                 state: data.zoneSender,
+                country: "Chile",
             },
             recipient: {
                 name: data.fullnameRecipient,
@@ -328,6 +330,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                 price_per_weight: getValues("shippingPrice"),
                 declared_value: getValues("packageValue"),
                 observations: data.observations,
+                payment_status: "Unpaid",
             },
         };
 
@@ -345,7 +348,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         body.order.recipient_id = recipientID;
 
         await create(url.createOrder, headers, body.order);
-        //await sendEmail(data, getValues("paymentMethod"));
+        await sendEmail(data, getValues("paymentMethod"));
         setLoading(false);
         console.log(data);
     };
@@ -453,7 +456,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent
-                            /* isValid={checkValidateTabSender()} */
+                            isValid={checkValidateTabSender()}
                             validationError={errorMessagesSender}
                         >
                             <StepRecipient
@@ -470,7 +473,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent
-                            /* isValid={checkValidateTabRecipient()} */
+                            isValid={checkValidateTabRecipient()}
                             validationError={errorMessagesRecipient}
                         >
                             <StepPackage
@@ -485,7 +488,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
                         </FormWizard.TabContent>
 
                         <FormWizard.TabContent
-                            /* isValid={checkValidateTabPackage()} */
+                            isValid={checkValidateTabPackage()}
                             validationError={errorMessagesPackage}
                         >
                             <StepPayment

@@ -63,7 +63,7 @@ const Footer = ({ displayTab }) => {
                     </a>
                     <a
                         onClick={() => propsModal.setOpenModal("contact")}
-                        className="grid grid-cols-1 items-end md:flex md:items-center md:gap-3 md:text-xl"
+                        className="grid cursor-pointer grid-cols-1 items-end md:flex md:items-center md:gap-3 md:text-xl"
                     >
                         <EmailIcon
                             width="33"

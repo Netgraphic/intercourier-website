@@ -9,7 +9,7 @@ const Header = ({ displayTab }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 z-10 w-full bg-main-color text-white">
+        <header className="fixed top-0 z-20 w-full border-b border-secondary-color bg-main-color text-white">
             <div className="container mx-auto p-5 md:flex md:w-3/4 md:items-center md:justify-between">
                 {/* Logo */}
                 <a href="./" className="text-2xl uppercase">
