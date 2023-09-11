@@ -2,7 +2,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const express = require("express");
-const serverless = require("serverless-http");
 const http = require("http");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -91,6 +90,9 @@ app.post("/apiFlow/result", async (req, res) => {
     const flowApi = new FlowApi(configFlow);
     let response = await flowApi.send(serviceName, params, "GET");
     //Actualiza los datos en su sistema
+    if (response.status === 1) {
+      res.redirect("http://localhost:3000/pending-payment");
+    }
     if (response.status === 2) {
       res.redirect("http://localhost:3000/success-payment");
     }
@@ -136,5 +138,3 @@ app.post("/apiFlow/create_email", async (req, res) => {
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-module.exports.handler = serverless(app);
