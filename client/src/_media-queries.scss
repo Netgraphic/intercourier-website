@@ -1,0 +1,53 @@
+@media screen and (min-width: 768px) {
+    .triangle {
+        height: 200px;
+
+        &::before {
+            height: 60px;
+            bottom: 60px;
+            transform: rotate(-4deg);
+        }
+    }
+
+    .triangle-upper {
+        height: 40px;
+        bottom: 130px;
+        right: -15px;
+        transform: rotate(-7.2deg);
+    }
+
+    .triangle-back {
+        height: 172px;
+        bottom: 30px;
+
+        &::before {
+            height: 30px;
+            top: 172px;
+        }
+    }
+
+    .santiago-map {
+        &::before {
+            top: 140px;
+            height: 50px;
+            width: 70%;
+        }
+
+        &::after {
+            bottom: -300px;
+            height: 50px;
+            width: 85%;
+        }
+    }
+
+    footer {
+        &::before {
+            height: 40px;
+            top: -40px;
+        }
+
+        &::after {
+            height: 40px;
+        }
+    }
+}
