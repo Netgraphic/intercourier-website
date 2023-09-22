@@ -53,12 +53,12 @@ const ModalContact = () => {
         } finally {
             setLoading(false);
             setMailSent(true);
+            reset();
         }
     };
 
     const obSubmit = (data) => {
         sendEmail(data);
-        reset();
     };
 
     return (

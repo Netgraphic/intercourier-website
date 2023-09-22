@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 import Navbar from "./Navbar";
+import Logo from "./Logo";
 
 const Header = ({ displayTab }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -12,8 +13,12 @@ const Header = ({ displayTab }) => {
         <header className="fixed top-0 z-20 w-full border-b border-secondary-color bg-main-color text-white">
             <div className="container mx-auto p-5 xl:flex xl:w-11/12 xl:items-center xl:justify-between">
                 {/* Logo */}
-                <a href="./" className="text-2xl uppercase">
-                    Intercourier
+                <a
+                    href="./"
+                    title="Intercourier &raquo; Ir al inicio"
+                    className="text-2xl uppercase"
+                >
+                    <Logo fill="#a03724" className="h-auto w-64 fill-white" />
                 </a>
 
                 {/* Menu */}
