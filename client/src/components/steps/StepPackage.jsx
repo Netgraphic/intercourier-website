@@ -124,7 +124,11 @@ const StepPackage = (props) => {
                 type="number"
                 placeholder="Ingrese valor del contenido"
                 required="true"
-                {...props.register("packageValue")}
+                {...props.register("packageValue", {
+                    onChange: (e) => {
+                        if (e.target.value < 0) e.target.value = "";
+                    },
+                })}
             >
                 <FormError error={props.errors.packageValue} />
             </FormInputText>

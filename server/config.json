@@ -2,5 +2,5 @@
     "apiKey": "29F5E3FF-FA73-4B20-90EA-7D2F539LCDC2",
     "secretKey": "cbd3f0c8286f9245b9ba48cca3989ce276523c04",
     "apiURL": "https://sandbox.flow.cl/api",
-    "baseURL": "http://localhost:5000/apiFlow"
+    "baseURL": "https://api.intercourier.cl/apiFlow"
 }

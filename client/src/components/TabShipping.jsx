@@ -337,7 +337,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         data.trackingCode = body.order.order_id;
 
         setLoading(true);
-        let senderID = await create(url.createSender, headers, body.sender);
+        /* let senderID = await create(url.createSender, headers, body.sender);
         let recipientID = await create(
             url.createRecipient,
             headers,
@@ -348,7 +348,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         body.order.recipient_id = recipientID;
 
         await create(url.createOrder, headers, body.order);
-        await sendEmail(data, getValues("paymentMethod"));
+        await sendEmail(data, getValues("paymentMethod")); */
         setLoading(false);
     };
 

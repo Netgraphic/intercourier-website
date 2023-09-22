@@ -9,7 +9,7 @@ export const sendEmail = async (formData, paymentMethod) => {
         }
 
         await emailjs.send(
-            "service_38kzxd8",
+            "service_79bgf68",
             template,
             formData,
             "4v7ewdebI9d1xDgg7"

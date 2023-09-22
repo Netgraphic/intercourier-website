@@ -8,4 +8,4 @@ const isLocalHost = Boolean(
 
 export const apiLink = isLocalHost
     ? "http://localhost:5000/apiFlow"
-    : "https://intercourier.netlify.app/apiFlow";
+    : "https://api.intercourier.cl/apiFlow";

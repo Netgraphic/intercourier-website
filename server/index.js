@@ -21,12 +21,22 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
-app.use(helmet());
+
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(compression());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const server = http.createServer(app);
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://intercourier.cl");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type, Accept"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 app.get("/", (req, res) => {
   return res.send("Hello world");
@@ -91,13 +101,13 @@ app.post("/apiFlow/result", async (req, res) => {
     let response = await flowApi.send(serviceName, params, "GET");
     //Actualiza los datos en su sistema
     if (response.status === 1) {
-      res.redirect("http://localhost:3000/pending-payment");
+      res.redirect("https://intercourier.cl/pending-payment");
     }
     if (response.status === 2) {
-      res.redirect("http://localhost:3000/success-payment");
+      res.redirect("https://intercourier.cl/success-payment");
     }
     if (response.status === 3 || response.status === 4) {
-      res.redirect("http://localhost:3000/error-payment");
+      res.redirect("https://intercourier.cl/error-payment");
     }
   } catch (error) {
     res.json({ error });
@@ -134,6 +144,8 @@ app.post("/apiFlow/create_email", async (req, res) => {
     res.json({ error: error });
   }
 });
+
+const server = http.createServer(app);
 
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);

@@ -39,7 +39,7 @@ const ModalContact = () => {
         try {
             setLoading(true);
             await emailjs.send(
-                "service_38kzxd8",
+                "service_79bgf68",
                 "template_0sn0q4m",
                 formData,
                 "4v7ewdebI9d1xDgg7"
