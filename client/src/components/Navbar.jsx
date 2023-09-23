@@ -20,7 +20,7 @@ const Navbar = ({ isOpen, setIsOpen, displayTab }) => {
 
     return (
         <nav
-            className={`absolute top-[67px] min-h-[80vh] w-[330px] rounded-bl-2xl border-b-2 border-l-2 border-main-color bg-menu-color p-10 text-right text-xl text-secondary-color transition-all duration-300 ease-in-out xl:relative xl:right-auto xl:top-auto xl:min-h-min xl:w-auto xl:border-none xl:bg-transparent xl:p-0 xl:text-left xl:text-base xl:text-white ${
+            className={`absolute top-[61.5px] min-h-[80vh] w-[330px] rounded-bl-2xl border-b-2 border-l-2 border-main-color bg-menu-color p-10 text-right text-xl text-secondary-color transition-all duration-300 ease-in-out xl:relative xl:right-auto xl:top-auto xl:min-h-min xl:w-auto xl:border-none xl:bg-transparent xl:p-0 xl:text-left xl:text-base xl:text-white ${
                 isOpen ? "right-0" : "right-[-330px]"
             }`}
         >

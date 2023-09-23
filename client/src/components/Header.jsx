@@ -18,13 +18,16 @@ const Header = ({ displayTab }) => {
                     title="Intercourier &raquo; Ir al inicio"
                     className="text-2xl uppercase"
                 >
-                    <Logo fill="#a03724" className="h-auto w-64 fill-white" />
+                    <Logo
+                        fill="#a03724"
+                        className="h-auto w-52 fill-white xl:w-64"
+                    />
                 </a>
 
                 {/* Menu */}
                 <a
                     onClick={() => setIsOpen(!isOpen)}
-                    className="absolute right-5 top-4 cursor-pointer text-3xl xl:hidden"
+                    className="absolute right-5 top-3 cursor-pointer text-3xl xl:hidden"
                 >
                     {isOpen ? (
                         <FontAwesomeIcon icon={faXmark} />

@@ -63,6 +63,21 @@ ol {
     }
 }
 
+.loading-bg {
+    background: $secondaryColor;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: all 0.5s ease-in-out;
+}
+
+.remove-loading-bg {
+    top: -100%;
+}
+
 .triangle {
     background-image: linear-gradient(
         to left top,
