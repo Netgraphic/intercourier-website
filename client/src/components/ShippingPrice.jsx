@@ -6,7 +6,7 @@ const ShippingPrice = ({ price }) => {
 
     return (
         <>
-            <div className="mt-8 w-full border-t-2 border-secondary-color pt-2 text-2xl text-secondary-color">
+            <div className="mt-6 w-full border-t-2 border-secondary-color pt-2 text-2xl text-secondary-color">
                 Total envío: $<span>{formatPrice(price)}</span>
             </div>
         </>

@@ -14,7 +14,7 @@ const Navbar = ({ isOpen, setIsOpen, displayTab }) => {
         { name: "Hacer envío", path: "tabs" },
         { name: "Cotización", path: "tabs" },
         { name: "Proceso de envío", path: "shipping-process" },
-        { name: "Sobre la empresa", path: "about" },
+        { name: "Nuestros Servicios", path: "services" },
         { name: "Preguntas Frecuentes", path: "faq" },
     ];
 

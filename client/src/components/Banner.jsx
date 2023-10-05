@@ -12,7 +12,7 @@ const Banner = () => {
     return (
         <div
             ref={banner}
-            className="relative flex h-56 items-center justify-center overflow-hidden bg-mobile-hero bg-contain bg-fixed bg-no-repeat pt-16 md:h-[600px] md:bg-desktop-hero md:bg-cover"
+            className="relative flex h-56 items-center justify-center bg-mobile-hero bg-contain bg-fixed bg-no-repeat pt-16 md:h-[600px] md:bg-desktop-hero md:bg-cover"
         >
             <h1 className="hidden text-center text-6xl text-white drop-shadow-lg lg:block">
                 Despachamos de puerta a puerta

@@ -6,9 +6,9 @@ const ShippingProcess = () => {
     return (
         <section
             id="shipping-process"
-            className="container mx-auto mt-28 px-10 md:mt-[450px] md:w-3/5"
+            className="container mx-auto mt-[290px] px-10 md:mt-[480px] md:w-3/5 xl:mt-[620px]"
         >
-            <h2 className="mb-5 text-2xl text-title-color md:text-4xl">
+            <h2 className="mb-8 text-2xl text-title-color md:text-4xl">
                 Proceso de envío
             </h2>
             <ol>

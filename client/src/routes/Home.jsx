@@ -6,7 +6,7 @@ import Tabs from "../components/Tabs";
 import Footer from "../components/Footer";
 
 import ShippingProcess from "../sections/ShippingProcess";
-import About from "../sections/About";
+import Services from "../sections/Services";
 import SantiagoIcon from "../components/icons/SantiagoIcon";
 import Faq from "../sections/Faq";
 
@@ -68,20 +68,24 @@ const Home = () => {
                 }}
             />
 
-            <div className="relative mx-auto mt-32 md:mt-0">
-                <div className="santiago-map container mx-auto px-5 text-4xl leading-none text-title-color md:w-3/5">
-                    <h2 className="md:relative md:top-52 md:w-1/2 md:text-6xl">
-                        Envíos a gran parte de Santiago
-                    </h2>
-                    <figure className="absolute -top-12 right-5 z-[-1] w-2/4 md:relative md:-top-20 md:float-right md:w-1/2">
-                        <SantiagoIcon />
-                    </figure>
+            <div className="relative mx-auto mt-10 md:mt-0">
+                <div className="santiago-map">
+                    <div className="santiago-triangle-top bottom-[125%] h-8 md:bottom-[135%] xl:bottom-[125%]  xl:h-12"></div>
+                    <div className="container relative mx-auto flex w-4/5 items-center justify-between md:w-3/5">
+                        <h2 className="w-1/2 py-2 text-2xl leading-6 text-white sm:text-2xl md:py-5 md:text-3xl lg:text-4xl xl:text-6xl">
+                            Envíos a gran parte de Santiago
+                        </h2>
+                        <figure className="absolute right-0 w-1/2">
+                            <SantiagoIcon />
+                        </figure>
+                    </div>
+                    <div className="santiago-triangle-bottom top-[115%] h-5 md:top-[120%] xl:top-[115%] xl:h-10"></div>
                 </div>
             </div>
 
             <ShippingProcess />
 
-            <About />
+            <Services />
 
             <Faq />
 

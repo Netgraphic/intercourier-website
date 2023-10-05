@@ -23,8 +23,14 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
     const date = new Date();
     const [orderValue, setOrderValue] = useState("Web");
     const { url, headers, create, createTrackingCode } = sistrack();
-    const { bannerHeight, agreeTerms, formatPrice, setLoading, propsModal } =
-        useContext(FormWizardContext);
+    const {
+        bannerHeight,
+        agreeTerms,
+        formatPrice,
+        setLoading,
+        ordersSubmitted,
+        propsModal,
+    } = useContext(FormWizardContext);
 
     const {
         register,
@@ -277,64 +283,66 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         }
     };
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (formData) => {
+        console.log(ordersSubmitted);
+        console.log(formData);
         //Update some values in different formats for submission
         let date = format(getValues("deliveryDate"), "dd/MM/yyyy");
-        data.deliveryDate = date;
+        formData.deliveryDate = date;
 
         let deliveryType = !getValues("expressDelivery") ? "Normal" : "Express";
-        data.expressDelivery = deliveryType;
+        formData.expressDelivery = deliveryType;
 
         let price = formatPrice(getValues("shippingPrice"));
-        data.shippingPrice = price;
+        formData.shippingPrice = price;
 
         let declaredValue = formatPrice(getValues("packageValue"));
-        data.packageValue = declaredValue;
+        formData.packageValue = declaredValue;
 
         let customDelivery = !customDeliveryTime
             ? "No"
             : getValues("deliveryDate");
-        data.deliveryDate = customDelivery;
+        formData.deliveryDate = customDelivery;
 
         propsModal.setOpenModal("confirmShipping");
 
         let body = {
             sender: {
-                name: data.fullnameSender,
-                telephone: data.phoneSender,
-                email: data.emailSender,
-                address_line_1: data.addressSender,
+                name: formData.fullnameSender,
+                telephone: formData.phoneSender,
+                email: formData.emailSender,
+                address_line_1: formData.addressSender,
                 city: "Santiago",
-                suburb: data.comunaSender,
-                state: data.zoneSender,
+                suburb: formData.comunaSender,
+                state: formData.zoneSender,
                 country: "Chile",
             },
             recipient: {
-                name: data.fullnameRecipient,
-                telephone: data.phoneRecipient,
-                email: data.emailRecipient,
-                address_line_1: data.addressRecipient,
+                name: formData.fullnameRecipient,
+                telephone: formData.phoneRecipient,
+                email: formData.emailRecipient,
+                address_line_1: formData.addressRecipient,
                 city: "Santiago",
-                suburb: data.comunaRecipient,
-                state: data.zoneRecipient,
+                suburb: formData.comunaRecipient,
+                state: formData.zoneRecipient,
                 country: "Chile",
             },
             order: {
                 sender_id: null,
                 recipient_id: null,
                 order_id: createTrackingCode(),
-                description: data.packageContents,
-                sender_phone: data.phoneSender,
-                recipient_phone: data.phoneRecipient,
+                description: formData.packageContents,
+                sender_phone: formData.phoneSender,
+                recipient_phone: formData.phoneRecipient,
                 weight: 5,
                 price_per_weight: getValues("shippingPrice"),
                 declared_value: getValues("packageValue"),
-                observations: data.observations,
+                observations: formData.observations,
                 payment_status: "Unpaid",
             },
         };
 
-        data.trackingCode = body.order.order_id;
+        formData.trackingCode = body.order.order_id;
 
         setLoading(true);
         /* let senderID = await create(url.createSender, headers, body.sender);
@@ -348,7 +356,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         body.order.recipient_id = recipientID;
 
         await create(url.createOrder, headers, body.order);
-        await sendEmail(data, getValues("paymentMethod")); */
+        await sendEmail(formData, getValues("paymentMethod")); */
         setLoading(false);
     };
 

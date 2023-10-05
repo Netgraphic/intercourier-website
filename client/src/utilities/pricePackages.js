@@ -1,6 +1,5 @@
 export const pricePackages = {
-    sizeS: 2000,
-    sizeM: 3000,
-    sizeL: 4000,
-    sizeXL: 5000,
+    sizeS: 2900,
+    sizeM: 3900,
+    sizeL: 4900,
 };

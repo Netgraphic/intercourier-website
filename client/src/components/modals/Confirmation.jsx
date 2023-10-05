@@ -2,9 +2,55 @@ import { useContext } from "react";
 import { Modal, Spinner } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormWizardContext } from "../../context/FormWizardProvider";
+import { pricePackages } from "../../utilities/pricePackages";
+
+import { summary } from "../../utilities/summary";
 
 const Confirmation = (props) => {
-    const { loading, propsModal } = useContext(FormWizardContext);
+    const {
+        bannerHeight,
+        loading,
+        setAgreeTerms,
+        formatPrice,
+        setPrice,
+        setPaylink,
+        setArrayOrders,
+        setOrdersSubmitted,
+        propsModal,
+    } = useContext(FormWizardContext);
+
+    const { fieldsSender, fieldsRecipient, fieldsPackage, fieldsPayment } =
+        summary();
+
+    const scrollDiv =
+        props.tabContainerShipping.current.offsetTop + bannerHeight + 20;
+
+    const newOrder = {
+        fieldsSender: fieldsSender(props.getValues),
+        fieldsRecipient: fieldsRecipient(props.getValues),
+        fieldsPackage: fieldsPackage(props.getValues),
+        fieldsPayment: fieldsPayment(props.getValues, formatPrice),
+    };
+
+    const addNewOrderFunctions = () => {
+        setArrayOrders((prev) => [...prev, newOrder]);
+        setOrdersSubmitted((prev) => [...prev, props.getValues()]);
+        propsModal.setOpenModal(undefined);
+        setAgreeTerms(false);
+        setPaylink(undefined);
+        setPrice({
+            packageSize: "S",
+            packagePrice: pricePackages.sizeS,
+        });
+        props.setConfirmSubmit(false);
+        props.setFormSubmitted(false);
+        props.formWizardRef.current?.reset();
+        props.reset();
+        window.scrollTo({
+            top: scrollDiv,
+            behavior: "smooth",
+        });
+    };
 
     return (
         <>
@@ -25,17 +71,24 @@ const Confirmation = (props) => {
                     </p>
                 </div>
             </Modal.Body>
-            <Modal.Footer className="justify-center">
+            <Modal.Footer className="flex-col justify-center gap-3 space-x-0 xl:flex-row">
                 <button
                     type="button"
-                    className="mr-2 w-32 rounded-3xl border-2 border-main-color px-8 py-4 leading-none text-main-color"
+                    className="w-full rounded-3xl border-2 border-main-color px-8 py-4 leading-none text-main-color xl:mr-2 xl:w-32"
                     onClick={() => propsModal.setOpenModal(undefined)}
                 >
                     Cancelar
                 </button>
                 <button
                     type="button"
-                    className="w-32 rounded-3xl border-2 border-main-color bg-main-color px-6 py-3 text-center leading-none text-white transition-all duration-200 ease-in-out hover:border-secondary-color hover:bg-secondary-color"
+                    className="w-full rounded-3xl border-2 border-secondary-color px-8 py-4 leading-none text-secondary-color xl:mr-2 xl:w-52 xl:py-4"
+                    onClick={() => addNewOrderFunctions()}
+                >
+                    Agregar otro envío
+                </button>
+                <button
+                    type="button"
+                    className="w-full rounded-3xl border-2 border-main-color bg-main-color px-6 py-3 text-center leading-none text-white transition-all duration-200 ease-in-out hover:border-secondary-color hover:bg-secondary-color xl:w-32"
                     onClick={() => props.setConfirmSubmit(true)}
                 >
                     {loading ? (

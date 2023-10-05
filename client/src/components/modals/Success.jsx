@@ -9,12 +9,8 @@ const Success = (props) => {
         return;
     }
 
-    const { bannerHeight, propsModal, setAgreeTerms, setPrice } =
-        useContext(FormWizardContext);
+    const { totalPrice, payLink, setPaylink } = useContext(FormWizardContext);
     const { createOrder } = flow();
-    const scrollDiv =
-        props.tabContainerShipping.current.offsetTop + bannerHeight + 20;
-    const [payLink, setPaylink] = useState();
     const [loading, setLoading] = useState(false);
 
     const getPaylink = async () => {
@@ -22,7 +18,7 @@ const Success = (props) => {
             setLoading(true);
             const data = await createOrder(
                 props.getValues("emailSender"),
-                props.getValues("shippingPrice")
+                totalPrice
             );
 
             setPaylink(data);
@@ -39,7 +35,7 @@ const Success = (props) => {
         }
     }, []);
 
-    console.log(`loading: ${loading}, payLink: ${payLink}`);
+    //console.log(`loading: ${loading}, payLink: ${payLink}`);
 
     return (
         <>
@@ -78,7 +74,7 @@ const Success = (props) => {
                                     <a
                                         href={payLink}
                                         target="_blank"
-                                        className="mx-auto block w-40 rounded-3xl bg-main-color px-8 py-2 text-center text-white"
+                                        className="mx-auto block w-40 rounded-3xl bg-main-color px-8 py-3 text-center text-white"
                                     >
                                         Pagar
                                     </a>
@@ -118,26 +114,6 @@ const Success = (props) => {
                 </div>
             </Modal.Body>
             <Modal.Footer className="justify-center">
-                <button
-                    type="button"
-                    className="mr-2 rounded-3xl border-2 border-main-color px-8 py-2 leading-none text-main-color md:py-4"
-                    onClick={() => {
-                        propsModal.setOpenModal(undefined);
-                        setAgreeTerms(false);
-                        setPaylink(undefined);
-                        setPrice({ packageSize: "S", packagePrice: 2000 });
-                        props.setConfirmSubmit(false);
-                        props.setFormSubmitted(false);
-                        props.formWizardRef.current?.reset();
-                        props.reset();
-                        window.scrollTo({
-                            top: scrollDiv,
-                            behavior: "smooth",
-                        });
-                    }}
-                >
-                    Hacer otro envío
-                </button>
                 <a
                     href="./"
                     className="cursor-pointer rounded-3xl border-2 border-main-color bg-main-color px-6 py-2 text-center leading-none text-white transition-all duration-200 ease-in-out hover:bg-secondary-color md:py-4"

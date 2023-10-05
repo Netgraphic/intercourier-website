@@ -32,7 +32,7 @@ const Footer = ({ displayTab }) => {
                         </span>
                     </a>
                     <a
-                        href="https://api.whatsapp.com/send?phone=56941347790"
+                        href="https://www.facebook.com/profile.php?id=61551555314222"
                         target="_blank"
                         className="grid grid-cols-1 items-end md:flex md:items-center md:gap-3 md:text-xl"
                     >
@@ -43,7 +43,7 @@ const Footer = ({ displayTab }) => {
                         />
                         <span className="block md:hidden">Facebook</span>
                         <span className="hidden md:inline-block">
-                            @intercourierchile
+                            @intercourier
                         </span>
                     </a>
                     <a
@@ -125,10 +125,10 @@ const Footer = ({ displayTab }) => {
                         smooth
                         spy
                         offset={-90}
-                        to="about"
+                        to="services"
                         className="cursor-pointer"
                     >
-                        Sobre la empresa
+                        Nuestros Servicios
                     </Link>
                     <div className="separator md:hidden"></div>
                     <Link

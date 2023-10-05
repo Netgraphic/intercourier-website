@@ -1,13 +1,15 @@
 import { forwardRef, useContext, useState } from "react";
 import { FormWizardContext } from "../context/FormWizardProvider";
 import { pricePackages } from "../utilities/pricePackages";
+
 import ShippingPrice from "./ShippingPrice";
+import AdditionalCosts from "./AdditionalCosts";
 
 const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
     const { formatPrice } = useContext(FormWizardContext);
     const [price, setPrice] = useState({
         packageSize: "S",
-        packagePrice: 2000,
+        packagePrice: pricePackages.sizeS,
     });
 
     const checkPackageSize = (size, priceSize) => {
@@ -32,7 +34,7 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                     Seleccione el tamaño de su paquete
                 </p>
 
-                <div className="mb-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+                <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
                     <div className="w-full">
                         <input
                             id="package-s"
@@ -55,10 +57,10 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             <div className="text-center">
                                 <span className="text-7xl">S</span>
                                 <div className="text-xs">
-                                    Tamaño máximo: 20 x 10 x 10 cm
+                                    Tamaño máximo: 40 x 40 cm
                                 </div>
                                 <div className="mt-2 text-xs">
-                                    Peso máximo: 2 Kg
+                                    Peso máximo: 5 Kg
                                 </div>
                             </div>
                         </label>
@@ -86,10 +88,10 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             <div className="text-center">
                                 <span className="text-7xl">M</span>
                                 <div className="text-xs">
-                                    Tamaño máximo: 20 x 10 x 10 cm
+                                    Tamaño máximo: 50 x 50 cm
                                 </div>
                                 <div className="mt-2 text-xs">
-                                    Peso máximo: 2 Kg
+                                    Peso máximo: 5 Kg
                                 </div>
                             </div>
                         </label>
@@ -117,46 +119,17 @@ const TabPricing = forwardRef(({ tab }, tabContainerPricing) => {
                             <div className="text-center">
                                 <span className="text-7xl">L</span>
                                 <div className="text-xs">
-                                    Tamaño máximo: 20 x 10 x 10 cm
+                                    Tamaño máximo: 60 x 60 cm
                                 </div>
                                 <div className="mt-2 text-xs">
-                                    Peso máximo: 2 Kg
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div className="w-full">
-                        <input
-                            id="package-xl"
-                            className="peer hidden"
-                            type="radio"
-                            name="package-size"
-                            value="XL"
-                            checked={price.packageSize === "XL"}
-                            onChange={(e) => {
-                                checkPackageSize(
-                                    e.target.value,
-                                    pricePackages.sizeXL
-                                );
-                            }}
-                        />
-                        <label
-                            htmlFor="package-xl"
-                            className="flex w-full cursor-pointer items-center justify-center rounded-xl border-2 border-secondary-color px-3 py-5 text-lg text-secondary-color peer-checked:bg-main-color peer-checked:text-white peer-checked:[&>div>span>svg]:stroke-white"
-                        >
-                            <div className="text-center">
-                                <span className="text-7xl">XL</span>
-                                <div className="text-xs">
-                                    Tamaño máximo: 20 x 10 x 10 cm
-                                </div>
-                                <div className="mt-2 text-xs">
-                                    Peso máximo: 2 Kg
+                                    Peso máximo: 5 Kg
                                 </div>
                             </div>
                         </label>
                     </div>
                 </div>
+
+                <AdditionalCosts />
 
                 <ShippingPrice price={formatPrice(price.packagePrice)} />
             </div>

@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { pricePackages } from "../utilities/pricePackages";
 
 export const FormWizardContext = createContext();
 
@@ -10,10 +11,15 @@ const FormWizardProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [viewTracking, setViewTracking] = useState(false);
     const propsModal = { openModal, setOpenModal };
+    const [pickupPrice, setPickupPrice] = useState(1000);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [payLink, setPaylink] = useState(undefined);
+    const [arrayOrders, setArrayOrders] = useState([]);
+    const [ordersSubmitted, setOrdersSubmitted] = useState([]);
 
     const [price, setPrice] = useState({
         packageSize: "S",
-        packagePrice: 2000,
+        packagePrice: pricePackages.sizeS,
     });
 
     const formatPrice = (price) => {
@@ -34,12 +40,22 @@ const FormWizardProvider = ({ children }) => {
                 price,
                 setPrice,
                 formatPrice,
+                pickupPrice,
+                setPickupPrice,
+                totalPrice,
+                setTotalPrice,
                 agreeTerms,
                 setAgreeTerms,
                 loading,
                 setLoading,
                 viewTracking,
                 setViewTracking,
+                payLink,
+                setPaylink,
+                arrayOrders,
+                setArrayOrders,
+                ordersSubmitted,
+                setOrdersSubmitted,
                 propsModal,
             }}
         >

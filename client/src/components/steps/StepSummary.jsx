@@ -1,106 +1,133 @@
 import { useContext, useEffect } from "react";
 import { Checkbox, Label } from "flowbite-react";
 import { FormWizardContext } from "../../context/FormWizardProvider";
-import { format } from "date-fns";
 
 import SummaryDetails from "../SummaryDetails";
 
-import {
-    senderSummary,
-    recipientSummary,
-    packageSummary,
-    paymentSummary,
-} from "../../utilities/summary";
+import { summary } from "../../utilities/summary";
 
 const StepSummary = (props) => {
-    const { setHeight, formatPrice, agreeTerms, setAgreeTerms, propsModal } =
-        useContext(FormWizardContext);
+    const {
+        setHeight,
+        formatPrice,
+        pickupPrice,
+        totalPrice,
+        setTotalPrice,
+        agreeTerms,
+        setAgreeTerms,
+        arrayOrders,
+        propsModal,
+    } = useContext(FormWizardContext);
 
-    const fieldsSender = senderSummary(
-        props.getValues("fullnameSender"),
-        props.getValues("addressSender"),
-        props.getValues("zoneSender"),
-        props.getValues("comunaSender"),
-        props.getValues("emailSender")
-    );
+    const { fieldsSender, fieldsRecipient, fieldsPackage, fieldsPayment } =
+        summary();
 
-    const fieldsRecipient = recipientSummary(
-        props.getValues("fullnameRecipient"),
-        props.getValues("addressRecipient"),
-        props.getValues("zoneRecipient"),
-        props.getValues("comunaRecipient"),
-        props.getValues("emailRecipient")
-    );
+    const pricesArray = [];
 
-    const fieldsPackage = packageSummary(
-        props.getValues("packageSize"),
-        props.getValues("packageContents"),
-        props.getValues("expressDelivery")
-    );
+    const calculateTotal = (prices) => {
+        if (prices.length >= 3) {
+            return prices.reduce((a, b) => a + b, 0);
+        }
 
-    const fieldsPayment = paymentSummary(
-        props.getValues("paymentMethod"),
-        formatPrice(props.getValues("shippingPrice"))
-    );
+        return prices.reduce((a, b) => a + b, 0) + pickupPrice;
+    };
 
-    if (props.getValues("phoneSender")) {
-        fieldsSender.push({
-            name: "Teléfono",
-            value: props.getValues("phoneSender"),
+    arrayOrders.map((order) => {
+        let priceOrder = order.fieldsPayment.slice(-1);
+        priceOrder.map((price) => {
+            let priceInteger = parseInt(price.value.replace(/[$.]/g, ""));
+            pricesArray.push(priceInteger);
         });
-    }
+    });
 
-    if (props.getValues("phoneRecipient")) {
-        fieldsRecipient.push({
-            name: "Teléfono",
-            value: props.getValues("phoneRecipient"),
-        });
-    }
-
-    if (
-        props.getValues("deliveryDate") &&
-        props.getValues("customDeliveryTime")
-    ) {
-        fieldsPackage.push({
-            name: "Envío programado",
-            value: format(props.getValues("deliveryDate"), "dd/MM/yyyy"),
-        });
-    }
-
-    if (props.getValues("observations")) {
-        fieldsPackage.push({
-            name: "Observaciones",
-            value: props.getValues("observations"),
-        });
-    }
+    // The latest price is added to the array
+    pricesArray.push(props.getValues("shippingPrice"));
+    const totalOrders = pricesArray.length;
 
     useEffect(() => {
         setHeight(props.tabContainerShipping.current.clientHeight);
-    }, []);
+        setTotalPrice(calculateTotal(pricesArray));
+    }, [totalPrice]);
 
     return (
         <>
-            <h3 className="mb-2 text-left text-xl">Resumen del envío:</h3>
+            <div className="mb-3 rounded-md bg-secondary-color p-2 text-center text-white">
+                Total de envíos: {totalOrders}
+            </div>
+            {totalOrders > 0 &&
+                arrayOrders.map((order, index) => (
+                    <div
+                        className="mb-5 rounded-xl border-4 border-main-color p-5"
+                        key={index}
+                    >
+                        <h3 className="mb-2 text-left text-xl">
+                            Resumen del envío{" "}
+                            <span className="text-main-color">
+                                #{index + 1}:
+                            </span>
+                        </h3>
 
-            <SummaryDetails
-                title="Información del remitente"
-                fields={fieldsSender}
-            />
+                        <SummaryDetails
+                            title="Información del remitente"
+                            fields={order.fieldsSender}
+                        />
 
-            <SummaryDetails
-                title="Información del destinatario"
-                fields={fieldsRecipient}
-            />
+                        <SummaryDetails
+                            title="Información del destinatario"
+                            fields={order.fieldsRecipient}
+                        />
 
-            <SummaryDetails
-                title="Información del paquete"
-                fields={fieldsPackage}
-            />
+                        <SummaryDetails
+                            title="Información del paquete"
+                            fields={order.fieldsPackage}
+                        />
 
-            <SummaryDetails
-                title="Información del pago"
-                fields={fieldsPayment}
-            />
+                        <SummaryDetails
+                            title="Información del pago"
+                            fields={order.fieldsPayment}
+                        />
+                    </div>
+                ))}
+
+            <div className="mb-5 rounded-xl border-4 border-main-color p-5">
+                <h3 className="mb-2 text-left text-xl">
+                    Resumen del envío{" "}
+                    <span className="text-main-color">#{totalOrders}:</span>
+                </h3>
+
+                <SummaryDetails
+                    title="Información del remitente"
+                    fields={fieldsSender(props.getValues)}
+                />
+
+                <SummaryDetails
+                    title="Información del destinatario"
+                    fields={fieldsRecipient(props.getValues)}
+                />
+
+                <SummaryDetails
+                    title="Información del paquete"
+                    fields={fieldsPackage(props.getValues)}
+                />
+
+                <SummaryDetails
+                    title="Información del pago"
+                    fields={fieldsPayment(props.getValues, formatPrice)}
+                />
+            </div>
+
+            {totalOrders < 3 && (
+                <div className="xl:text-lg">
+                    <span className="mr-1 text-title-color">
+                        Valor del retiro:
+                    </span>{" "}
+                    ${formatPrice(pickupPrice)}
+                </div>
+            )}
+
+            <div className="mt-5 border-b-4 border-t-4 border-secondary-color py-2 text-right text-lg text-secondary-color xl:text-xl">
+                Total a pagar: ${formatPrice(totalPrice)}
+            </div>
 
             {props.getValues("paymentMethod") === "Transferencia" && (
                 <>

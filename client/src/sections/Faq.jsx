@@ -37,7 +37,7 @@ const Faq = () => {
     );
 
     return (
-        <section id="faq" className="container mx-auto mt-16 px-10 md:w-3/5">
+        <section id="faq" className="container mx-auto mt-20 px-10 md:w-3/5">
             <h2 className="mb-5 text-2xl text-title-color md:text-4xl">
                 Preguntas Frecuentes
             </h2>
@@ -52,7 +52,7 @@ const Faq = () => {
                             className="cursor-pointer text-secondary-color"
                             onClick={() => propsModal.setOpenModal("contact")}
                         >
-                            formulario de contacto.
+                            Formulario de contacto.
                         </a>
                     </p>
                 </AccordionItem>
@@ -74,10 +74,8 @@ const Faq = () => {
 
                 <AccordionItem header="¿Cuál es el peso máximo permitido por paquete?">
                     <p className="leading-tight">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Suspendisse sit amet nibh id justo placerat faucibus.
-                        Etiam malesuada, urna non auctor luctus, tortor tellus
-                        molestie justo, vitae vulputate elit tortor in dui.
+                        El peso máximo del paquete no debe exceder los 5 kg y
+                        debe contar con una medida máxima de 60 x 60 cm.
                     </p>
                 </AccordionItem>
 
@@ -90,7 +88,7 @@ const Faq = () => {
                             className="cursor-pointer text-secondary-color"
                             onClick={() => propsModal.setOpenModal("contact")}
                         >
-                            formulario de contacto.
+                            Formulario de contacto.
                         </a>
                     </p>
                 </AccordionItem>

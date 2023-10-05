@@ -28,7 +28,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://intercourier.cl");
+  const origin = req.headers.origin;
+
+  if (allowedDomains.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
   res.setHeader(
     "Access-Control-Allow-Headers",

@@ -39,17 +39,18 @@ const ModalConfirmShipping = (props) => {
             {!formSubmitted ? (
                 <Confirmation
                     icon={faCircleQuestion}
+                    getValues={props.getValues}
                     setConfirmSubmit={setConfirmSubmit}
+                    tabContainerShipping={props.tabContainerShipping}
+                    formWizardRef={props.formWizardRef}
+                    reset={props.reset}
+                    setFormSubmitted={setFormSubmitted}
                 />
             ) : (
                 <Success
                     icon={faThumbsUp}
                     getValues={props.getValues}
                     tabContainerShipping={props.tabContainerShipping}
-                    formWizardRef={props.formWizardRef}
-                    reset={props.reset}
-                    setConfirmSubmit={setConfirmSubmit}
-                    setFormSubmitted={setFormSubmitted}
                 />
             )}
         </Modal>

@@ -1,0 +1,292 @@
+@mixin vendor($property, $value...) {
+    -webkit-#{$property}: $value;
+    -moz-#{$property}: $value;
+    -ms-#{$property}: $value;
+    -o-#{$property}: $value;
+    #{$property}: $value;
+}
+
+@mixin truck-skew {
+    0%,
+    15%,
+    48%,
+    75%,
+    100% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.215, 0.61, 0.355, 1)
+        );
+        @include vendor(transform, skewX(-15deg));
+    }
+
+    35%,
+    38% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, skewX(-13deg));
+    }
+
+    65% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, tskewX(-12deg));
+    }
+
+    85% {
+        @include vendor(transform, skewX(-14deg));
+    }
+}
+
+@-webkit-keyframes truck-skew {
+    @include truck-skew;
+}
+
+@keyframes truck-skew {
+    @include truck-skew;
+}
+
+@mixin wheel-front-bounce {
+    0%,
+    20%,
+    53%,
+    80%,
+    100% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.215, 0.61, 0.355, 1)
+        );
+        @include vendor(transform, translate3d(0, 0, 0));
+    }
+
+    40%,
+    43% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, translate3d(0, -10px, 0));
+    }
+
+    70% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, translate3d(0, -5px, 0));
+    }
+
+    90% {
+        @include vendor(transform, translate3d(0, -1px, 0));
+    }
+}
+
+@-webkit-keyframes wheel-front-bounce {
+    @include wheel-front-bounce;
+}
+
+@keyframes wheel-front-bounce {
+    @include wheel-front-bounce;
+}
+
+@mixin wheel-back-bounce {
+    0%,
+    25%,
+    58%,
+    85%,
+    100% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.215, 0.61, 0.355, 1)
+        );
+        @include vendor(transform, translate3d(0, 0, 0));
+    }
+
+    45%,
+    48% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, translate3d(0, -10px, 0));
+    }
+
+    75% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, translate3d(0, -5px, 0));
+    }
+
+    95% {
+        @include vendor(transform, translate3d(0, -1px, 0));
+    }
+}
+
+@-webkit-keyframes wheel-back-bounce {
+    @include wheel-back-bounce;
+}
+
+@keyframes wheel-back-bounce {
+    @include wheel-back-bounce;
+}
+
+@mixin body-bounce {
+    0%,
+    15%,
+    48%,
+    75%,
+    100% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.215, 0.61, 0.355, 1)
+        );
+        @include vendor(transform, translate3d(0, 0, 0));
+    }
+
+    35%,
+    38% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, translate3d(0, -10px, 0));
+    }
+
+    65% {
+        @include vendor(
+            transition-timing-function,
+            cubic-bezier(0.755, 0.05, 0.855, 0.06)
+        );
+        @include vendor(transform, translate3d(0, -5px, 0));
+    }
+
+    85% {
+        @include vendor(transform, translate3d(0, -1px, 0));
+    }
+}
+
+@-webkit-keyframes body-bounce {
+    @include body-bounce;
+}
+
+@keyframes body-bounce {
+    @include body-bounce;
+}
+
+@mixin gas-first-flow {
+    0% {
+        opacity: 0;
+        @include vendor(transition-timing-function, linear);
+    }
+
+    50% {
+        opacity: 1;
+        @include vendor(transition-timing-function, linear);
+        @include vendor(transform, translate3d(-20px, -3px, 0));
+    }
+
+    100% {
+        opacity: 0;
+        @include vendor(transition-timing-function, linear);
+        @include vendor(transform, translate3d(-40px, -6px, 0));
+    }
+}
+
+@-webkit-keyframes gas-first-flow {
+    @include gas-first-flow;
+}
+
+@keyframes gas-first-flow {
+    @include gas-first-flow;
+}
+
+@mixin gas-last-flow {
+    0% {
+        opacity: 0;
+        @include vendor(transition-timing-function, linear);
+        @include vendor(transform, translate3d(30px, 0px, 0));
+    }
+
+    50% {
+        opacity: 1;
+        @include vendor(transition-timing-function, linear);
+        @include vendor(transform, translate3d(10px, -5px, 0));
+    }
+
+    100% {
+        opacity: 0;
+        @include vendor(transition-timing-function, linear);
+        @include vendor(transform, translate3d(0px, -10px, 0));
+    }
+}
+
+@-webkit-keyframes gas-last-flow {
+    @include gas-last-flow;
+}
+
+@keyframes gas-last-flow {
+    @include gas-last-flow;
+}
+
+#truck {
+    @include vendor(animation-duration, 1s);
+    @include vendor(animation-iteration-count, infinite);
+    @include vendor(animation-fill-mode, both);
+    @include vendor(animation-name, truck-skew);
+    width: 100px;
+
+    #wheel--front {
+        @include vendor(animation-duration, 1s);
+        @include vendor(animation-iteration-count, infinite);
+        @include vendor(animation-fill-mode, both);
+        @include vendor(animation-name, wheel-front-bounce);
+    }
+
+    #wheel--back {
+        @include vendor(animation-duration, 1s);
+        @include vendor(animation-iteration-count, infinite);
+        @include vendor(animation-fill-mode, both);
+        @include vendor(animation-name, wheel-back-bounce);
+    }
+
+    #body {
+        @include vendor(animation-duration, 1s);
+        @include vendor(animation-iteration-count, infinite);
+        @include vendor(animation-fill-mode, both);
+        @include vendor(animation-name, body-bounce);
+        fill: $titleColor;
+    }
+
+    #gas--first {
+        @include vendor(animation-timing-function, linear);
+        @include vendor(animation-duration, 0.7s);
+        @include vendor(animation-iteration-count, infinite);
+        @include vendor(animation-fill-mode, both);
+        @include vendor(animation-name, gas-first-flow);
+        fill: #dedede;
+    }
+
+    #gas--last {
+        @include vendor(animation-timing-function, linear);
+        @include vendor(animation-duration, 0.8s);
+        @include vendor(animation-iteration-count, infinite);
+        @include vendor(animation-fill-mode, both);
+        @include vendor(animation-name, gas-last-flow);
+        fill: #ececec;
+    }
+}
+
+#truck {
+    width: 200px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -61px;
+    margin-left: -100px;
+}

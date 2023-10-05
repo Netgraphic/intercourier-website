@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { FormWizardContext } from "../../context/FormWizardProvider";
 import { pricePackages } from "../../utilities/pricePackages";
 
+import AdditionalCosts from "../AdditionalCosts";
 import FormInputRadio from "./fields/FormInputRadio";
 import FormTextArea from "./fields/FormTextArea";
 import FormError from "./fields/FormError";
@@ -29,10 +30,6 @@ const StepPackage = (props) => {
                 setPrice({ ...price, packagePrice: pricePackages.sizeL });
                 break;
 
-            case "XL":
-                setPrice({ ...price, packagePrice: pricePackages.sizeXL });
-                break;
-
             default:
                 setPrice({ ...price, packagePrice: pricePackages.sizeS });
         }
@@ -47,17 +44,17 @@ const StepPackage = (props) => {
         <>
             <h3 className="mb-4 text-left text-xl">Información del paquete:</h3>
 
-            <p className="mb-3 rounded-md bg-secondary-color p-2 text-sm leading-tight text-white">
+            <p className="mb-3 rounded-md bg-secondary-color p-3 text-sm leading-tight text-white">
                 <span className="block uppercase">Importante:</span> Asegúrese
                 de empacar el producto correctamente antes de hacer el envío.
             </p>
 
-            <div className="mb-4 grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-3">
                 <FormInputRadio
                     id="size-s"
                     icon="S"
-                    label="Tamaño máximo: 20 x 10 x 10 cm"
-                    label2="Peso máximo: 2 Kg"
+                    label="Tamaño máximo: 40 x 40 cm"
+                    label2="Peso máximo: 5 Kg"
                     value="S"
                     {...props.register("packageSize", {
                         onChange: (e) => {
@@ -69,8 +66,8 @@ const StepPackage = (props) => {
                 <FormInputRadio
                     id="size-m"
                     icon="M"
-                    label="Tamaño máximo: 60 x 40 x 10 cm"
-                    label2="Peso máximo: 6 Kg"
+                    label="Tamaño máximo: 50 x 50 cm"
+                    label2="Peso máximo: 5 Kg"
                     value="M"
                     {...props.register("packageSize", {
                         onChange: (e) => {
@@ -82,22 +79,9 @@ const StepPackage = (props) => {
                 <FormInputRadio
                     id="size-l"
                     icon="L"
-                    label="Tamaño máximo: 60 x 40 x 10 cm"
-                    label2="Peso máximo: 8 Kg"
+                    label="Tamaño máximo: 60 x 60 cm"
+                    label2="Peso máximo: 5 Kg"
                     value="L"
-                    {...props.register("packageSize", {
-                        onChange: (e) => {
-                            updateShippingPrice(e.target.value);
-                        },
-                    })}
-                />
-
-                <FormInputRadio
-                    id="size-xl"
-                    icon="XL"
-                    label="Tamaño máximo: 60 x 40 x 10 cm"
-                    label2="Peso máximo: 10 Kg"
-                    value="XL"
                     {...props.register("packageSize", {
                         onChange: (e) => {
                             updateShippingPrice(e.target.value);
@@ -180,6 +164,8 @@ const StepPackage = (props) => {
                 <span className="mr-1 text-secondary-color">(*)</span>Campos
                 obligatorios
             </p>
+
+            <AdditionalCosts />
 
             <ShippingPrice price={formatPrice(price.packagePrice)} />
         </>
