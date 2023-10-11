@@ -33,10 +33,7 @@ export const summary = () => {
             );
         },
         fieldsPayment: (getValues, formatPrice) => {
-            return paymentSummary(
-                getValues("paymentMethod"),
-                formatPrice(getValues("shippingPrice"))
-            );
+            return paymentSummary(formatPrice(getValues("shippingPrice")));
         },
     };
 };
@@ -149,12 +146,8 @@ const packageSummary = (
     return data;
 };
 
-const paymentSummary = (payment, price) => {
+const paymentSummary = (price) => {
     return [
-        {
-            name: "Forma de pago",
-            value: payment,
-        },
         {
             name: "Valor del envío",
             value: "$" + price,

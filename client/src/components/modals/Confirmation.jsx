@@ -32,9 +32,23 @@ const Confirmation = (props) => {
         fieldsPayment: fieldsPayment(props.getValues, formatPrice),
     };
 
-    const addNewOrderFunctions = () => {
+    const updateStatesArrays = (
+        setArrayOrders,
+        setOrdersSubmitted,
+        newOrder,
+        orders
+    ) => {
         setArrayOrders((prev) => [...prev, newOrder]);
-        setOrdersSubmitted((prev) => [...prev, props.getValues()]);
+        setOrdersSubmitted((prev) => [...prev, orders]);
+    };
+
+    const handleAddNewOrder = () => {
+        updateStatesArrays(
+            setArrayOrders,
+            setOrdersSubmitted,
+            newOrder,
+            props.getValues()
+        );
         propsModal.setOpenModal(undefined);
         setAgreeTerms(false);
         setPaylink(undefined);
@@ -82,7 +96,7 @@ const Confirmation = (props) => {
                 <button
                     type="button"
                     className="w-full rounded-3xl border-2 border-secondary-color px-8 py-4 leading-none text-secondary-color xl:mr-2 xl:w-52 xl:py-4"
-                    onClick={() => addNewOrderFunctions()}
+                    onClick={() => handleAddNewOrder()}
                 >
                     Agregar otro envío
                 </button>

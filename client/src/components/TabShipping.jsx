@@ -13,6 +13,7 @@ import StepSummary from "./steps/StepSummary";
 import FormInputHidden from "./steps/fields/FormInputHidden";
 import ModalConfirmShipping from "./modals/ModalConfirmShipping";
 
+import { watchFields } from "../utilities/formWatchFields";
 import { comunasSantiago } from "../utilities/comunas";
 import { pricePackages } from "../utilities/pricePackages";
 import { sendEmail } from "../utilities/submitShipping";
@@ -80,22 +81,7 @@ const TabShipping = forwardRef(({ tab }, tabContainerShipping) => {
         packageValue,
         expressDelivery,
         customDeliveryTime,
-    ] = watch([
-        "fullnameSender",
-        "addressSender",
-        "zoneSender",
-        "comunaSender",
-        "emailSender",
-        "fullnameRecipient",
-        "addressRecipient",
-        "zoneRecipient",
-        "comunaRecipient",
-        "emailRecipient",
-        "packageContents",
-        "packageValue",
-        "expressDelivery",
-        "customDeliveryTime",
-    ]);
+    ] = watch(watchFields);
 
     useEffect(() => {
         if (localStorage.getItem("deliveryDate") !== null) {

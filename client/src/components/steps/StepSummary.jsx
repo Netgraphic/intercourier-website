@@ -117,7 +117,7 @@ const StepSummary = (props) => {
             </div>
 
             {totalOrders < 3 && (
-                <div className="xl:text-lg">
+                <div className="mb-2 xl:text-lg">
                     <span className="mr-1 text-title-color">
                         Valor del retiro:
                     </span>{" "}
@@ -125,15 +125,18 @@ const StepSummary = (props) => {
                 </div>
             )}
 
+            <div className="xl:text-lg">
+                <span className="mr-1 text-title-color">Forma de pago:</span>{" "}
+                {props.getValues("paymentMethod")}
+            </div>
+
             <div className="mt-5 border-b-4 border-t-4 border-secondary-color py-2 text-right text-lg text-secondary-color xl:text-xl">
                 Total a pagar: ${formatPrice(totalPrice)}
             </div>
 
             {props.getValues("paymentMethod") === "Transferencia" && (
-                <>
-                    <h4 className="mb-1 text-lg text-secondary-color">
-                        Datos de la cuenta
-                    </h4>
+                <div className="mt-5 rounded-xl bg-secondary-color p-4 text-center text-white">
+                    <h4 className="mb-1 text-lg">Datos de la cuenta</h4>
                     <ul className="text-sm [&>li:last-child]:mb-0 [&>li]:mb-1">
                         <li className="uppercase">
                             Sociedad de inversiones jm spa
@@ -145,7 +148,7 @@ const StepSummary = (props) => {
                         <li>Número: 0221341785</li>
                         <li>Email: pagos@intercourier.cl</li>
                     </ul>
-                </>
+                </div>
             )}
 
             <div className="mt-4 flex items-center gap-2">

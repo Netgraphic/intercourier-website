@@ -1,0 +1,16 @@
+export const watchFields = [
+    "fullnameSender",
+    "addressSender",
+    "zoneSender",
+    "comunaSender",
+    "emailSender",
+    "fullnameRecipient",
+    "addressRecipient",
+    "zoneRecipient",
+    "comunaRecipient",
+    "emailRecipient",
+    "packageContents",
+    "packageValue",
+    "expressDelivery",
+    "customDeliveryTime",
+];
